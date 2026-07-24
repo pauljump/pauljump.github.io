@@ -1,0 +1,77 @@
+{
+  "cases": 13,
+  "selected": 13,
+  "correct": 13,
+  "precision": 1.0,
+  "recall": 1.0,
+  "falsePositives": 0,
+  "falseNegatives": 0,
+  "modelCalls": 29,
+  "details": [
+    {
+      "id": "tlb-rate",
+      "selectedSpanId": "span:b044ed4005eb:000911",
+      "correct": true
+    },
+    {
+      "id": "revolver-floor",
+      "selectedSpanId": "span:b044ed4005eb:000913",
+      "correct": true
+    },
+    {
+      "id": "ecf-stepdowns",
+      "selectedSpanId": "span:b044ed4005eb:000955",
+      "correct": true
+    },
+    {
+      "id": "asset-sale-reinvestment",
+      "selectedSpanId": "span:b044ed4005eb:000969",
+      "correct": true
+    },
+    {
+      "id": "springing-trigger",
+      "selectedSpanId": "span:b044ed4005eb:001605",
+      "correct": true
+    },
+    {
+      "id": "equity-cure-period",
+      "selectedSpanId": "span:b044ed4005eb:001609",
+      "correct": true
+    },
+    {
+      "id": "permitted-acquisition-test",
+      "selectedSpanId": "span:b044ed4005eb:001507",
+      "correct": true
+    },
+    {
+      "id": "cost-savings-addback",
+      "selectedSpanId": "span:b044ed4005eb:000461",
+      "correct": true
+    },
+    {
+      "id": "incremental-capacity",
+      "selectedSpanId": "span:b044ed4005eb:001085",
+      "correct": true
+    },
+    {
+      "id": "mfn-sunset",
+      "selectedSpanId": "span:b044ed4005eb:001117",
+      "correct": true
+    },
+    {
+      "id": "soft-call",
+      "selectedSpanId": "span:b044ed4005eb:000939",
+      "correct": true
+    },
+    {
+      "id": "immaterial-subsidiary",
+      "selectedSpanId": "span:b044ed4005eb:001297",
+      "correct": true
+    },
+    {
+      "id": "extraordinary-receipts",
+      "selectedSpanId": "span:b044ed4005eb:000973",
+      "correct": true
+    }
+  ]
+}

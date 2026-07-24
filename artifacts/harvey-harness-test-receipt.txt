@@ -1,0 +1,18 @@
+HARVEY LOCAL HARNESS TEST RECEIPT
+
+Run date: 2026-07-23
+Machine: Mac Mini, Apple Silicon
+Harness branch: preserve/harvey-local-20260721
+Harness commit: aa63cb9f
+Pinned Harvey LAB revision: 73feb91d63d53b1a44151d99329779c4defcdb72
+
+Command:
+.venv/bin/pytest -q
+
+Result:
+11013 passed, 59 skipped, 3 warnings in 9.28s
+
+Scope note:
+This receipt verifies the preserved local harness and its test suite. It is not a
+legal-quality score, a held-out model evaluation, or an externally validated
+capability claim.
