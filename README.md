@@ -11,3 +11,7 @@ Evidence packages:
 - [pauljump/opwdd-requirements-engine](https://github.com/pauljump/opwdd-requirements-engine) — the deterministic eligibility requirement engine and its frozen backtest against a real agency letter
 
 This repository contains the static site generated from the tested source project. It does not include private records, client documents, medical files, or unpublished legal material.
+
+Strategy notes:
+
+- [AI transformation advisory handoff](docs/ai-transformation-advisory-handoff-2026-08-02.md)
