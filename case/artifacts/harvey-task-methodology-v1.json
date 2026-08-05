@@ -1,0 +1,114 @@
+{
+  "schema_version": "harvey-task-methodology-v1",
+  "purpose": "Task-agnostic execution and evaluation gates for every Harvey benchmark task.",
+  "rubric_access_before_judging": false,
+  "phases": [
+    {
+      "id": "readiness",
+      "required_gates": [
+        "verified_patch_chain",
+        "focused_tests_pass",
+        "neutral_real_sandbox_preflight_pass",
+        "model_and_runtime_identity_match",
+        "host_extraction_dependencies_pass"
+      ]
+    },
+    {
+      "id": "freeze_contract",
+      "required_fields": [
+        "task_id",
+        "task_status",
+        "task_manifest_sha256",
+        "source_inventory",
+        "required_deliverables",
+        "runner_sha256",
+        "model_revision",
+        "limits",
+        "retry_policy",
+        "judge_policy"
+      ]
+    },
+    {
+      "id": "classify_work",
+      "allowed_inputs": [
+        "task_instructions",
+        "source_inventory"
+      ],
+      "outputs": [
+        "work_type",
+        "source_profile",
+        "deliverable_contract",
+        "general_retrieval_protocol"
+      ]
+    },
+    {
+      "id": "evidence",
+      "required_gates": [
+        "all_sources_accessed",
+        "instruction_evidence_mapped",
+        "material_claims_traceable",
+        "missing_evidence_explicit"
+      ]
+    },
+    {
+      "id": "draft",
+      "required_gates": [
+        "exact_output_path",
+        "instruction_aligned_structure",
+        "specific_supported_analysis",
+        "deterministic_binary_compilation"
+      ]
+    },
+    {
+      "id": "local_screen",
+      "required_gates": [
+        "artifact_valid",
+        "source_gate_pass",
+        "instruction_completeness_pass",
+        "evidence_specificity_pass",
+        "unsupported_claim_screen_pass",
+        "usefulness_screen_pass",
+        "independent_artifact_read_through_judge_ready"
+      ]
+    },
+    {
+      "id": "external_judge",
+      "entry_requires_all_local_gates": true,
+      "required_gates": [
+        "explicit_authorization",
+        "artifact_frozen_and_hashed",
+        "local_extraction_verified",
+        "judge_configuration_recorded",
+        "results_preserved_without_overwrite"
+      ]
+    },
+    {
+      "id": "classify_and_route",
+      "primary_failure_classes": [
+        "infrastructure",
+        "harness_protocol",
+        "retrieval",
+        "analysis_model",
+        "artifact",
+        "evaluation",
+        "capability_failure",
+        "capability_pass"
+      ]
+    }
+  ],
+  "automatic_stops": [
+    "safety_breach",
+    "bounded_artifact_retry_exhausted",
+    "three_identical_tool_call_batches",
+    "route_or_context_refusal",
+    "immutable_input_missing_or_mismatched"
+  ],
+  "rerun_policy": "Consumed-task reruns are labeled regression evidence and never replace the original run or count as fresh benchmark observations.",
+  "valid_score_requires": [
+    "safety_contract_pass",
+    "unchanged_structurally_valid_artifact",
+    "successful_local_content_extraction",
+    "authorized_recorded_evaluator_configuration",
+    "preserved_receipt_artifact_score_and_report_hashes"
+  ]
+}

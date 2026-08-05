@@ -1,0 +1,72 @@
+{
+  "cases": 13,
+  "recall@5": 0.8461538461538461,
+  "mrr": 0.6923076923076923,
+  "details": [
+    {
+      "id": "tlb-rate",
+      "rank": 2,
+      "hitAtK": true
+    },
+    {
+      "id": "revolver-floor",
+      "rank": 1,
+      "hitAtK": true
+    },
+    {
+      "id": "ecf-stepdowns",
+      "rank": 1,
+      "hitAtK": true
+    },
+    {
+      "id": "asset-sale-reinvestment",
+      "rank": 1,
+      "hitAtK": true
+    },
+    {
+      "id": "springing-trigger",
+      "rank": 1,
+      "hitAtK": true
+    },
+    {
+      "id": "equity-cure-period",
+      "rank": null,
+      "hitAtK": false
+    },
+    {
+      "id": "permitted-acquisition-test",
+      "rank": 4,
+      "hitAtK": true
+    },
+    {
+      "id": "cost-savings-addback",
+      "rank": 1,
+      "hitAtK": true
+    },
+    {
+      "id": "incremental-capacity",
+      "rank": 1,
+      "hitAtK": true
+    },
+    {
+      "id": "mfn-sunset",
+      "rank": null,
+      "hitAtK": false
+    },
+    {
+      "id": "soft-call",
+      "rank": 1,
+      "hitAtK": true
+    },
+    {
+      "id": "immaterial-subsidiary",
+      "rank": 1,
+      "hitAtK": true
+    },
+    {
+      "id": "extraordinary-receipts",
+      "rank": 4,
+      "hitAtK": true
+    }
+  ]
+}
