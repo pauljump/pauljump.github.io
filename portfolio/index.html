@@ -3,197 +3,167 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#0a0912" />
-    <title>Paul Jump — What the work taught me</title>
-    <meta name="description" content="I built everything I could think of. It kept teaching me the same thing. The projects, lessons, and path that led Paul Jump to Kit." />
-    <meta property="og:title" content="Paul Jump — What the work taught me" />
-    <meta property="og:description" content="I built everything I could think of. It kept teaching me the same thing." />
+    <meta name="theme-color" content="#10110f" />
+    <title>paul jump — software, products, and tools</title>
+    <meta name="description" content="selected work, live demos, source code, and a project archive." />
+    <meta property="og:title" content="paul jump — software, products, and tools" />
+    <meta property="og:description" content="selected work, live demos, source code, and a project archive." />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://pauljump.github.io/portfolio" />
+    <meta property="og:url" content="https://pauljump.github.io/portfolio/" />
     <meta property="og:image" content="https://pauljump.github.io/portfolio/og.png" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Paul Jump — What the work taught me" />
-    <meta name="twitter:description" content="I built everything I could think of. It kept teaching me the same thing." />
+    <meta name="twitter:title" content="paul jump — software, products, and tools" />
+    <meta name="twitter:description" content="selected work, live demos, source code, and a project archive." />
     <meta name="twitter:image" content="https://pauljump.github.io/portfolio/og.png" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
-    <header class="nav">
-      <a class="mark" href="#top" aria-label="Paul Jump, back to top">PJ</a>
-      <nav aria-label="Portfolio sections">
-        <a href="#thread">The thread</a>
-        <a href="#kit">Kit</a>
-        <a href="#work">Work</a>
-      </nav>
+    <header class="site-nav">
+      <div class="site-nav-inner">
+        <a href="#top" class="site-mark" aria-label="paul jump, back to top"><span aria-hidden="true"></span>pj/</a>
+        <nav aria-label="portfolio sections" class="site-links">
+          <a href="#work">work</a>
+          <a href="#x">x</a>
+          <a href="#archive">archive</a>
+          <a href="mailto:pjump007@gmail.com">contact</a>
+        </nav>
+      </div>
     </header>
 
     <main>
-      <section class="hero" id="top">
-        <div class="orb orb-one" aria-hidden="true"></div>
-        <div class="orb orb-two" aria-hidden="true"></div>
-        <div class="hero-inner">
-          <p class="eyebrow">Paul Jump · New York · 2026</p>
-          <h1>I built everything<br />I could think of.<span>It kept teaching me the same thing.</span></h1>
-          <div class="hero-copy">
-            <p>After ten years at Uber, AI made the cost of trying almost zero. So I stopped guessing and built: products for cities, renters, dates, kids, lawyers, and people trying to understand themselves.</p>
-            <p>Most of them are not companies. They are how I learned what kind of company I was supposed to build.</p>
+      <section id="top" class="hero-shell">
+        <div class="site-shell hero-grid">
+          <p class="section-code">00 / paul jump<br />new york / 2026</p>
+          <div class="hero-content">
+            <p class="eyebrow">paul jump / new york</p>
+            <h1>i build software.<span class="cursor" aria-hidden="true"></span></h1>
+            <div class="hero-copy">
+              <p>i spent ten years at uber. now i build products with ai, public data, local models, and native apps.</p>
+              <p>this page has selected work, live demos, source code, and a complete project archive.</p>
+            </div>
+            <div class="hero-actions">
+              <a href="#work" class="button button-primary">selected work ↓</a>
+              <a href="https://github.com/pauljump" class="button">github ↗</a>
+            </div>
           </div>
-          <div class="actions">
-            <a class="button primary" href="#thread">Follow the thread ↓</a>
-            <a class="button quiet" href="https://kit.polyfeeds.dev">What I am building now ↗</a>
+        </div>
+      </section>
+
+      <section id="work" class="work-section">
+        <div class="site-shell section-layout section-heading">
+          <p class="section-code">01 / selected work</p>
+          <div>
+            <p class="eyebrow">seven projects</p>
+            <h2>products and tools.</h2>
           </div>
         </div>
-        <div class="hero-foot"><span>Exploration was the method.</span><span>Kit is the conclusion.</span></div>
-      </section>
-
-      <section class="turning">
-        <div>
-          <p class="eyebrow">The freedom and the problem</p>
-          <blockquote>AI let me make software faster than I could decide what deserved to exist.</blockquote>
-          <p class="turning-copy">Casting a wide net was not a failure to choose. It was how I learned to see the pattern. Every rabbit hole left behind a piece of the system I would eventually need.</p>
-        </div>
-      </section>
-
-      <section class="thread" id="thread">
-        <div class="intro">
-          <p class="eyebrow">Field notes from the search</p>
-          <h2>Seven builds. Seven lessons. One direction.</h2>
-          <p>The projects look unrelated from far away. Up close, they are all about giving one person the context, software, and leverage usually reserved for an institution.</p>
-        </div>
-
-        <div class="learning-list">
-          <article class="learning">
-            <span class="number">01</span>
-            <div class="copy">
-              <p class="project">Colosseum</p>
-              <h3>Generation got cheap. Judgment did not.</h3>
-              <p>I kept getting more honest answers when I made models argue than when I asked one model for advice. So I built a real-time debate arena with structured roles, provenance, human votes, and a separate judge.</p>
-              <aside><span>What it taught me</span>The useful product is rarely the answer. It is the system that produces the answer, challenges it, and leaves receipts.</aside>
-              <a href="https://colosseum.polyfeeds.dev">Open Colosseum ↗</a>
+        <div class="site-shell work-list">
+          <article class="work-row has-visual">
+            <div class="work-number">01</div>
+            <div class="work-copy">
+              <h3 class="work-project">colosseum</h3>
+              <p class="work-description">a live ai debate app. several models take assigned roles, cite sources, and argue in an oxford-format debate. people vote before and after. a separate model judges the result.</p>
+              <div class="work-links"><a href="https://colosseum.polyfeeds.dev">open colosseum ↗</a></div>
             </div>
-            <figure><img src="./assets/colosseum.png" alt="Colosseum product screen" loading="lazy" /></figure>
+            <figure class="work-visual"><img src="./assets/colosseum.png" alt="colosseum product screen" loading="lazy" /></figure>
           </article>
 
-          <article class="learning reverse">
-            <span class="number">02</span>
-            <div class="copy">
-              <p class="project">Unignorable</p>
-              <h3>Institutions close tickets. People live with what comes back.</h3>
-              <p>Problems around my kids' school kept getting reported to 311, closed, and reported again as if they were unrelated. I joined 455,000 reports into one history and mapped what the city kept forgetting.</p>
-              <aside><span>What it taught me</span>The person on the other side of an institution needs memory stronger than the institution's workflow.</aside>
-              <a href="https://unignorable.polyfeeds.dev">Open Unignorable ↗</a>
+          <article class="work-row has-visual">
+            <div class="work-number">02</div>
+            <div class="work-copy">
+              <h3 class="work-project">unignorable</h3>
+              <p class="work-description">a map of 455,000 nyc 311 reports about encampments, drug activity, and homeless assistance. it tracks repeat reports, closures, and reopen rates.</p>
+              <div class="work-links"><a href="https://unignorable.polyfeeds.dev">open unignorable ↗</a></div>
             </div>
-            <figure><img src="./assets/unignorable.png" alt="Unignorable product screen" loading="lazy" /></figure>
+            <figure class="work-visual"><img src="./assets/unignorable.png" alt="unignorable product screen" loading="lazy" /></figure>
           </article>
 
-          <article class="learning type-card">
-            <span class="number">03</span>
-            <div class="copy">
-              <p class="project">Pricefixed</p>
-              <h3>Sometimes the missing product is actually a missing data layer.</h3>
-              <p>Every real-estate idea I tried hit the same wall: the facts a renter needed were fragmented across listings, public records, price histories, and landlord portfolios. I joined them across millions of apartments.</p>
-              <aside><span>What it taught me</span>Consumer power starts by reconstructing the context that better-resourced institutions already have.</aside>
-              <a href="https://github.com/pauljump/pricefixed">View the open tools ↗</a>
+          <article class="work-row">
+            <div class="work-number">03</div>
+            <div class="work-copy">
+              <h3 class="work-project">pricefixed</h3>
+              <p class="work-description">tools that join apartment listings, public records, price histories, and landlord portfolios across millions of apartments.</p>
+              <div class="work-links"><a href="https://github.com/pauljump/pricefixed">view the open tools ↗</a></div>
             </div>
-            <figure class="words"><small>03</small><strong>Price<br />fixed</strong><i></i></figure>
           </article>
 
-          <article class="learning reverse">
-            <span class="number">04</span>
-            <div class="copy">
-              <p class="project">Unhinged</p>
-              <h3>Personal software can be intimate without becoming extractive.</h3>
-              <p>I wondered whether an iPhone and Apple Watch could tell you what your body already knew about a date. I built a private report from 16 on-device signals.</p>
-              <aside><span>What it taught me</span>The most personal context can stay with the person. Useful AI does not require turning their life into somebody else's dataset.</aside>
-              <a href="https://unhinged.polyfeeds.dev/iosdemo">Open Unhinged ↗</a>
+          <article class="work-row has-visual">
+            <div class="work-number">04</div>
+            <div class="work-copy">
+              <h3 class="work-project">unhinged</h3>
+              <p class="work-description">an iphone and apple watch app that creates a private date report from 16 on-device signals.</p>
+              <div class="work-links"><a href="https://unhinged.polyfeeds.dev/iosdemo">open unhinged ↗</a></div>
             </div>
-            <figure><img src="./assets/unhinged.png" alt="Unhinged product screen" loading="lazy" /></figure>
+            <figure class="work-visual"><img src="./assets/unhinged.png" alt="unhinged product screen" loading="lazy" /></figure>
           </article>
 
-          <article class="learning">
-            <span class="number">05</span>
-            <div class="copy">
-              <p class="project">RexAir + Walt's Workshop</p>
-              <h3>Software for one person is a real market now.</h3>
-              <p>My sons needed software built around how they actually think. I built Rex a real-flight learning system and gave Walt a voice-to-game loop that shipped 13 games from his own ideas.</p>
-              <aside><span>What it taught me</span>AI makes custom software cheap enough to begin with one person. The pattern that works for them can become the starting point for the next family.</aside>
-              <div class="links"><a href="https://portfolio.polyfeeds.dev/demos/rexair">Open RexAir ↗</a><a href="https://portfolio.polyfeeds.dev/demos/waltsworkshop">Open Walt's Workshop ↗</a></div>
+          <article class="work-row has-visual">
+            <div class="work-number">05</div>
+            <div class="work-copy">
+              <h3 class="work-project">rexair + walt's workshop</h3>
+              <p class="work-description">rexair is a flight app built for my son. it searches real routes and dates, books a seat, and tracks the aircraft. walt's workshop turns my son's spoken ideas into small games. it has shipped 13 games.</p>
+              <div class="work-links"><a href="https://portfolio.polyfeeds.dev/demos/rexair">open rexair ↗</a><a href="https://portfolio.polyfeeds.dev/demos/waltsworkshop">open walt's workshop ↗</a></div>
             </div>
-            <figure><img src="./assets/rexair.png" alt="RexAir product screen" loading="lazy" /></figure>
+            <figure class="work-visual"><img src="./assets/rexair.png" alt="rexair product screen" loading="lazy" /></figure>
           </article>
 
-          <article class="learning reverse type-card">
-            <span class="number">06</span>
-            <div class="copy">
-              <p class="project">Slopify</p>
-              <h3>You can own more of the stack than you think.</h3>
-              <p>A joke about Spotify deleting AI music became a streaming product, a locally generated catalog, and an iPhone app that could make music without a generation API.</p>
-              <aside><span>What it taught me</span>Local and open models are not just cheaper infrastructure. They change which consumer products can exist and who gets to control them.</aside>
-              <a href="https://tryslopify.com">Open Slopify ↗</a>
+          <article class="work-row">
+            <div class="work-number">06</div>
+            <div class="work-copy">
+              <h3 class="work-project">slopify</h3>
+              <p class="work-description">a streaming app for locally generated music, plus an iphone app that generates music without a hosted generation api.</p>
+              <div class="work-links"><a href="https://tryslopify.com">open slopify ↗</a></div>
             </div>
-            <figure class="words"><small>06</small><strong>Slop<br />ify</strong><i></i></figure>
           </article>
 
-          <article class="learning">
-            <span class="number">07</span>
-            <div class="copy">
-              <p class="project">Teek + Vibecheck + Whetstone</p>
-              <h3>Sounding right is not the same as being right.</h3>
-              <p>I built source-backed models of how people decide, a private profiler of how I build, and evaluation harnesses that force AI systems to show where their claims came from.</p>
-              <aside><span>What it taught me</span>Provenance and evaluation cannot be a final polish step. In consequential workflows, they are the product.</aside>
-              <div class="links"><a href="https://github.com/pauljump/teek">View Teek ↗</a><a href="https://vibecheck.polyfeeds.dev">Open Vibecheck ↗</a></div>
+          <article class="work-row has-visual">
+            <div class="work-number">07</div>
+            <div class="work-copy">
+              <h3 class="work-project">teek + vibecheck + whetstone</h3>
+              <p class="work-description">teek builds source-backed models of how people make decisions. vibecheck reads local claude code, codex, and cursor logs and reports how i build with ai. whetstone tests ai claims against their cited sources.</p>
+              <div class="work-links"><a href="https://github.com/pauljump/teek">view teek ↗</a><a href="https://vibecheck.polyfeeds.dev">open vibecheck ↗</a></div>
             </div>
-            <figure><img src="./assets/vibecheck.png" alt="Vibecheck product screen" loading="lazy" /></figure>
+            <figure class="work-visual"><img src="./assets/vibecheck.png" alt="vibecheck product screen" loading="lazy" /></figure>
           </article>
         </div>
       </section>
 
-      <section class="principles">
-        <div>
-          <p class="eyebrow">What survived every experiment</p>
-          <h2>The model is not the product.</h2>
-          <p>The product is the context, workflow, and evaluation around it.</p>
-        </div>
-        <ol>
-          <li><span>01</span><div><strong>Context before model</strong><p>Knowing what to look for matters more than asking a larger model.</p></div></li>
-          <li><span>02</span><div><strong>Workflow over chat</strong><p>A useful answer still leaves the person holding all the work.</p></div></li>
-          <li><span>03</span><div><strong>Receipts over vibes</strong><p>Sources, checks, and outcomes have to survive the demo.</p></div></li>
-          <li><span>04</span><div><strong>Every case compounds</strong><p>A solved edge should make the next person's problem cheaper to finish.</p></div></li>
-        </ol>
-      </section>
-
-      <section class="kit" id="kit">
-        <div class="kit-inner">
-          <p class="eyebrow">Then the work came home.</p>
-          <h2>Kit is where the experiments stopped being experiments.</h2>
-          <div class="kit-story">
-            <p>My son is autistic. For five years, my family has navigated schools, therapies, insurers, evaluations, and New York's OPWDD system. Money and support can be sitting there, technically available, while the parent becomes the integration layer between institutions that do not talk to each other.</p>
-            <p>At a dads' night, another parent told me a swimming reimbursement had been stuck for weeks. I pulled out my phone, researched the rule, the fiscal intermediary, and the pool, then built the missing provider evidence. The family told me the first Kit-prepared packet was approved within 48 hours.</p>
-            <p>I reused the workflow for martial arts and piano. All three families reported that their first Kit-prepared packet was approved. What looked like magic was a workflow. What worked once could become a pattern for the next family.</p>
+      <section id="x" class="feed-section">
+        <div class="site-shell section-layout feed-heading">
+          <p class="section-code">02 / x</p>
+          <div>
+            <p class="eyebrow">recent posts</p>
+            <h2>@paulljump</h2>
           </div>
-          <div class="metrics"><div><strong>3</strong><span>real reimbursement cases</span></div><div><strong>3</strong><span>family-reported approvals</span></div><div><strong>48h</strong><span>for the stuck swimming request</span></div></div>
-          <div class="kit-close"><p>Forward deployment used to be reserved for enterprises because only enterprises could afford engineers inside their problems. AI changes that. Kit starts family by family, solves the workflow end to end, and turns what worked into something reusable.</p><a class="button kit-button" href="https://kit.polyfeeds.dev">See what I am building now ↗</a></div>
+        </div>
+        <div class="site-shell feed-terminal">
+          <div class="terminal-bar"><span>~/x/paulljump</span><a href="https://x.com/paulljump">open on x ↗</a></div>
+          <div class="feed-frame">
+            <a class="twitter-timeline" data-theme="dark" data-dnt="true" data-chrome="noheader nofooter noborders transparent" data-height="680" href="https://twitter.com/paulljump">open @paulljump on x ↗</a>
+          </div>
         </div>
       </section>
 
-      <section class="work" id="work">
-        <div class="intro">
-          <p class="eyebrow">Proof you can open</p>
-          <h2>The work is real.</h2>
-          <p>A few of the products behind the lessons. The complete searchable record stays live at the factory.</p>
-        </div>
-        <div class="work-grid">
-          <a href="https://colosseum.polyfeeds.dev"><img src="./assets/colosseum.png" alt="" /><span>AI debate and judgment</span><strong>Colosseum</strong></a>
-          <a href="https://unignorable.polyfeeds.dev"><img src="./assets/unignorable.png" alt="" /><span>Institutional memory</span><strong>Unignorable</strong></a>
-          <a href="https://portfolio.polyfeeds.dev/demos/rexair"><img src="./assets/rexair.png" alt="" /><span>Software for one kid</span><strong>RexAir</strong></a>
-          <a href="https://unhinged.polyfeeds.dev/iosdemo"><img src="./assets/unhinged.png" alt="" /><span>Private personalization</span><strong>Unhinged</strong></a>
-          <a href="https://vibecheck.polyfeeds.dev"><img src="./assets/vibecheck.png" alt="" /><span>AI builder profile</span><strong>Vibecheck</strong></a>
-          <a href="https://portfolio.polyfeeds.dev"><div class="archive-tile">130+<small>documented builds</small></div><span>The complete record</span><strong>Open the archive</strong></a>
+      <section id="archive" class="archive-section">
+        <div class="site-shell section-layout archive-heading">
+          <p class="section-code">03 / archive</p>
+          <div>
+            <p class="eyebrow">132 documented projects</p>
+            <h2>project archive.</h2>
+            <p>the archive lists every documented project. filter by status or search by name.</p>
+            <a href="https://portfolio.polyfeeds.dev/#archive" class="button button-primary archive-link">search the full archive ↗</a>
+          </div>
         </div>
       </section>
     </main>
 
-    <footer><div><strong>Paul Jump</strong><p>Building Kit in New York.</p></div><nav><a href="https://kit.polyfeeds.dev">Kit</a><a href="https://github.com/pauljump">GitHub</a><a href="https://x.com/paulljump">X</a><a href="mailto:pjump007@gmail.com">Email</a></nav></footer>
+    <footer class="site-footer">
+      <div class="site-shell footer-inner">
+        <div><div class="footer-mark"><span aria-hidden="true"></span>paul jump</div><p>new york.</p></div>
+        <nav class="footer-links" aria-label="external links"><a href="https://kit.polyfeeds.dev">kit ↗</a><a href="https://github.com/pauljump">github ↗</a><a href="https://x.com/paulljump">x ↗</a><a href="mailto:pjump007@gmail.com">email ↗</a></nav>
+      </div>
+    </footer>
+    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
   </body>
 </html>
