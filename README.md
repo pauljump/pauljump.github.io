@@ -1,17 +1,18 @@
-# Paul Jump | Applied AI systems
+# Paul Jump
 
-Public case study site for three hands-on projects in model training, evaluation, retrieval, and verification.
+Paul's personal site and the public story of how a wide year of building led to
+[Kit](https://kitty.polyfeeds.dev/askkit).
 
-Live site: [pauljump.github.io](https://pauljump.github.io) — case study at [/case/](https://pauljump.github.io/case/)
+Live site: [pauljump.github.io](https://pauljump.github.io)
 
-Evidence packages:
+The repository is a dependency-free static GitHub Pages site. The homepage is
+authored directly in `index.html`; the existing applied AI case study remains
+available at [/case/](https://pauljump.github.io/case/).
 
-- [pauljump/itchy](https://github.com/pauljump/itchy) — the 16 MB byte-level language model, including the data-leakage report that invalidated the attractive result
-- [pauljump/legal-ai-verification-pilot](https://github.com/pauljump/legal-ai-verification-pilot) — Harvey LAB adaptation, retrieval, and verification
-- [pauljump/opwdd-requirements-engine](https://github.com/pauljump/opwdd-requirements-engine) — the deterministic eligibility requirement engine and its frozen backtest against a real agency letter
+Public product links:
 
-This repository contains the static site generated from the tested source project. It does not include private records, client documents, medical files, or unpublished legal material.
+- [Try Kit](https://kitty.polyfeeds.dev/askkit)
+- [See the packet demo](https://kitty.polyfeeds.dev/askkit/demo)
 
-Strategy notes:
-
-- [AI transformation advisory handoff](docs/ai-transformation-advisory-handoff-2026-08-02.md)
+This repository contains no private family records, client documents, medical
+files, or unpublished legal material.
