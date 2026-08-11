@@ -136,7 +136,6 @@ a:focus-visible { outline: 1px solid var(--signal); outline-offset: 3px; }
 }
 
 .hero-copy p,
-.thesis-copy,
 .archive-heading > div > p {
   margin: 0;
   color: var(--muted);
@@ -167,17 +166,15 @@ a:focus-visible { outline: 1px solid var(--signal); outline-offset: 3px; }
 .button-primary { border-color: var(--signal); background: #879f8f14; color: var(--signal); }
 .button-primary:hover { border-color: var(--signal); background: #879f8f24; color: var(--signal); }
 
-.thesis-section,
 .work-section,
+.feed-section,
 .archive-section {
   scroll-margin-top: 3.4rem;
   border-bottom: 1px solid var(--line);
 }
 
-.thesis-section { padding: clamp(5rem, 9vw, 8rem) 0; }
-
-.thesis-section h2,
 .section-heading h2,
+.feed-heading h2,
 .archive-heading h2 {
   max-width: 56rem;
   margin: 1rem 0 0;
@@ -185,14 +182,6 @@ a:focus-visible { outline: 1px solid var(--signal); outline-offset: 3px; }
   font-weight: 500;
   letter-spacing: -0.055em;
   line-height: 1;
-}
-
-.thesis-copy {
-  max-width: 47rem;
-  margin-top: 1.7rem;
-  color: var(--text);
-  font-size: clamp(1.15rem, 2.2vw, 1.75rem);
-  line-height: 1.5;
 }
 
 .section-heading { padding: clamp(5rem, 9vw, 8rem) 0 3rem; }
@@ -211,31 +200,20 @@ a:focus-visible { outline: 1px solid var(--signal); outline-offset: 3px; }
 .work-row.has-visual { grid-template-columns: 3.5rem minmax(0, 1fr) minmax(18rem, 0.82fr); }
 .work-number { padding-top: 0.2rem; color: var(--signal); font-size: 0.68rem; }
 .work-copy { max-width: 38rem; }
-.work-project { margin: 0; color: var(--muted); font-size: 0.69rem; }
-
-.work-copy h3 {
-  margin: 0.85rem 0 0;
+.work-project {
+  margin: 0;
   font-size: clamp(1.65rem, 3.25vw, 3rem);
   font-weight: 500;
   letter-spacing: -0.045em;
   line-height: 1.08;
 }
 
-.work-story {
+.work-description {
   margin: 1.35rem 0 0;
   color: var(--muted);
   font-size: 0.9rem;
   line-height: 1.72;
 }
-
-.work-learned {
-  margin-top: 1.6rem;
-  padding-top: 1rem;
-  border-top: 1px solid var(--line);
-}
-
-.work-learned span { color: var(--signal); font-size: 0.63rem; }
-.work-learned p { margin: 0.6rem 0 0; font-size: 0.84rem; line-height: 1.6; }
 
 .work-links {
   display: flex;
@@ -272,6 +250,40 @@ a:focus-visible { outline: 1px solid var(--signal); outline-offset: 3px; }
 }
 
 .work-row:hover .work-visual img { filter: grayscale(0); opacity: 1; }
+.feed-section { padding: clamp(6rem, 11vw, 9rem) 0; }
+.feed-heading { margin-bottom: 3rem; }
+
+.feed-terminal {
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: var(--surface);
+}
+
+.terminal-bar {
+  display: flex;
+  min-height: 2.8rem;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.7rem 1rem;
+  border-bottom: 1px solid var(--line);
+  color: var(--faint);
+  font-size: 0.64rem;
+}
+
+.terminal-bar::before { content: ">"; color: var(--signal); }
+.terminal-bar span { margin-right: auto; }
+.terminal-bar a { color: var(--muted); }
+.terminal-bar a:hover { color: var(--signal); }
+
+.feed-frame {
+  width: min(100%, 44rem);
+  min-height: 4rem;
+  margin-inline: auto;
+  padding: 1rem;
+}
+
+.feed-frame .twitter-timeline { color: var(--muted); font-size: 0.72rem; }
 .archive-section { padding: clamp(6rem, 11vw, 10rem) 0; }
 .archive-heading > div > p { max-width: 43rem; margin-top: 1.5rem; }
 .archive-link { margin-top: 2rem; }
