@@ -4,7 +4,7 @@
   --surface-high: 75 5% 12%;
   --foreground: 70 7% 84%;
   --muted: 70 4% 58%;
-  --muted-2: 70 3% 42%;
+  --muted-2: 70 3% 55%;
   --border: 75 5% 19%;
   --accent: 145 14% 58%;
   --accent-foreground: 80 5% 6%;
@@ -38,6 +38,20 @@ body {
 }
 
 a { color: inherit; text-decoration: none; }
+
+.skip-link {
+  position: fixed;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 100;
+  padding: 0.65rem 0.8rem;
+  background: hsl(var(--accent));
+  color: hsl(var(--accent-foreground));
+  font-size: 0.75rem;
+  transform: translateY(-200%);
+}
+
+.skip-link:focus { transform: translateY(0); }
 button, input { font: inherit; text-transform: lowercase; }
 
 a:focus-visible,
@@ -205,7 +219,8 @@ input:focus-visible {
   background: hsl(var(--background));
 }
 
-.project-card > a {
+.project-card > a,
+.project-card-content {
   display: flex;
   height: 100%;
   flex-direction: column;
@@ -246,7 +261,7 @@ input:focus-visible {
   border: 1px solid hsl(var(--border));
   background: hsl(var(--background) / 0.9);
   color: hsl(var(--accent));
-  font-size: 0.55rem;
+  font-size: 0.625rem;
   backdrop-filter: blur(8px);
 }
 
@@ -299,7 +314,7 @@ input:focus-visible {
 
 .project-notes dt {
   color: hsl(var(--accent));
-  font-size: 0.56rem;
+  font-size: 0.625rem;
 }
 
 .project-notes dd {
@@ -370,7 +385,7 @@ input:focus-visible {
 .catalog-filters button span { color: hsl(var(--muted-2)); }
 .catalog-filters button:hover { color: hsl(var(--foreground)); }
 .catalog-filters button[aria-pressed="true"] { border-color: hsl(var(--accent)); background: hsl(var(--accent) / 0.08); color: hsl(var(--accent)); }
-.catalog-filters button[aria-pressed="true"] span { color: inherit; opacity: 0.68; }
+.catalog-filters button[aria-pressed="true"] span { color: inherit; }
 
 .catalog-search {
   display: flex;
@@ -405,8 +420,8 @@ input:focus-visible {
 .catalog-item:hover { background: hsl(var(--surface)); box-shadow: inset 2px 0 hsl(var(--accent)); }
 .catalog-item-head { display: flex; align-items: start; justify-content: space-between; gap: 1rem; }
 .catalog-item h4 { margin: 0; font-size: 0.82rem; font-weight: 500; }
-.catalog-item-head > span { flex: 0 0 auto; color: hsl(var(--accent)); font-size: 0.52rem; }
-.catalog-url { margin-top: 0.8rem; overflow: hidden; color: hsl(var(--muted-2)); font-size: 0.56rem; text-overflow: ellipsis; white-space: nowrap; }
+.catalog-item-head > span { flex: 0 0 auto; color: hsl(var(--accent)); font-size: 0.625rem; }
+.catalog-url { margin-top: 0.8rem; overflow: hidden; color: hsl(var(--muted-2)); font-size: 0.625rem; text-overflow: ellipsis; white-space: nowrap; }
 .catalog-empty { padding: 5rem 1rem; border: 1px solid hsl(var(--border)); text-align: center; }
 .catalog-empty p { color: hsl(var(--muted)); font-size: 0.75rem; }
 .catalog-empty button { margin-top: 1rem; border: 0; background: transparent; color: hsl(var(--accent)); cursor: pointer; text-decoration: underline; }
