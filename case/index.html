@@ -770,7 +770,8 @@
             landingPath: landingPath(),
             visitorId: visitorId(),
             screen: window.innerWidth + "x" + window.innerHeight,
-          }, attribution(), extra || {}));
+            props: extra || {},
+          }, attribution()));
         }
 
         function send(event, extra) {
@@ -809,8 +810,8 @@
             var target = new URL(link.href, window.location.href);
             if (target.protocol !== "http:" && target.protocol !== "https:") return;
             if (target.origin === window.location.origin) return;
-            send("outbound_link", {
-              targetHost: target.hostname,
+            send("outbound:" + target.hostname, {
+              target: target.origin + cleanPath(target.pathname),
               targetPath: cleanPath(target.pathname),
               linkLabel: (link.textContent || "").trim().slice(0, 120) || undefined,
             });
@@ -823,7 +824,7 @@
             entries.forEach(function (entry) {
               if (!entry.isIntersecting || viewed[entry.target.id]) return;
               viewed[entry.target.id] = true;
-              send("case_view", { caseId: entry.target.id });
+              send("case_view:" + entry.target.id);
               observer.unobserve(entry.target);
             });
           }, { threshold: 0.5 });
