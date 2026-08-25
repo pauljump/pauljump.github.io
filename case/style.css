@@ -156,6 +156,27 @@ h1, h2, h3, p { margin-top: 0; }
 .studio-flow-grid p { margin: 14px 0 0; color: var(--muted); font-size: 13px; line-height: 1.5; }
 .studio-proof { margin-top: 36px; }
 
+.teek-stack { margin-top: 72px; padding: 37px; border: 1px solid var(--dark-line); background: #202020; }
+.teek-stack-heading { display: flex; justify-content: space-between; align-items: flex-end; gap: 28px; }
+.teek-stack-heading .eyebrow { margin-bottom: 0; color: #8eb5cf; }
+.teek-stack-heading > p:last-child { max-width: 330px; margin: 0; color: #9ea19b; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 11px; line-height: 1.45; text-align: right; }
+.teek-stack-grid { display: grid; grid-template-columns: repeat(5, 1fr); margin-top: 36px; border-top: 1px solid var(--dark-line); border-bottom: 1px solid var(--dark-line); }
+.teek-stack-grid > div { min-height: 220px; padding: 25px 22px 26px; display: flex; flex-direction: column; border-left: 1px solid var(--dark-line); }
+.teek-stack-grid > div:first-child { border-left: 0; }
+.teek-stack-grid span { color: #9ea19b; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 11px; }
+.teek-stack-grid strong { margin-top: 37px; font-size: 15px; }
+.teek-stack-grid p { margin: 14px 0 0; color: #babcb7; font-size: 13px; line-height: 1.5; }
+.teek-use { margin-top: 46px; padding-top: 30px; border-top: 1px solid var(--dark-line); }
+.teek-use .eyebrow { margin-bottom: 22px; color: #8eb5cf; }
+.teek-use-grid { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--dark-line); border-bottom: 1px solid var(--dark-line); }
+.teek-use-grid > div { min-height: 228px; padding: 24px 26px 28px 0; display: flex; flex-direction: column; }
+.teek-use-grid > div + div { padding-left: 26px; border-left: 1px solid var(--dark-line); }
+.teek-use-grid span { color: #9ea19b; font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 11px; text-transform: uppercase; }
+.teek-use-grid strong { margin-top: 31px; font-size: 15px; line-height: 1.2; }
+.teek-use-grid p { margin: 15px 0 0; color: #babcb7; font-size: 13px; line-height: 1.52; }
+.teek-proof { margin-top: 46px; }
+.dark .teek-note { color: #babcb7; }
+
 .work-item { padding-top: 110px; padding-bottom: 116px; }
 .work-item .lede { margin-bottom: 48px; }
 .work-rail { padding: 29px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
@@ -182,6 +203,9 @@ footer div { display: flex; gap: 22px; }
   .studio-flow-grid { grid-template-columns: 1fr 1fr; }
   .studio-flow-grid > div:nth-child(odd) { border-left: 0; }
   .studio-flow-grid > div:nth-child(n + 3) { border-top: 1px solid var(--line); }
+  .teek-stack-grid { grid-template-columns: 1fr 1fr; }
+  .teek-stack-grid > div:nth-child(odd) { border-left: 0; }
+  .teek-stack-grid > div:nth-child(n + 3) { border-top: 1px solid var(--dark-line); }
   .steps { grid-template-columns: 1fr 1fr; }
   .steps > div:nth-child(3), .steps > div:nth-child(5) { border-left: 0; border-top: 1px solid #444; }
 }
@@ -207,6 +231,17 @@ footer div { display: flex; gap: 22px; }
   .studio-flow-grid { grid-template-columns: 1fr; }
   .studio-flow-grid > div, .studio-flow-grid > div:nth-child(odd) { min-height: 150px; border-left: 0; border-top: 1px solid var(--line); }
   .studio-flow-grid > div:first-child { border-top: 0; }
+  .teek-stack { margin-top: 52px; padding: 24px 18px; }
+  .teek-stack-heading { flex-direction: column; align-items: flex-start; }
+  .teek-stack-heading > p:last-child { max-width: none; text-align: left; }
+  .teek-stack-grid { grid-template-columns: 1fr; }
+  .teek-stack-grid > div, .teek-stack-grid > div:nth-child(odd) { min-height: 150px; border-left: 0; border-top: 1px solid var(--dark-line); }
+  .teek-stack-grid > div:first-child { border-top: 0; }
+  .teek-use { margin-top: 36px; }
+  .teek-use-grid { grid-template-columns: 1fr; }
+  .teek-use-grid > div, .teek-use-grid > div + div { min-height: 0; padding: 25px 0; border-left: 0; border-top: 1px solid var(--dark-line); }
+  .teek-use-grid > div:first-child { border-top: 0; }
+  .teek-proof { margin-top: 36px; }
   .work-item { padding-top: 82px; padding-bottom: 88px; }
   .work-rail { padding: 23px 0; }
   .work-rail > p:last-child { font-size: 16px; }

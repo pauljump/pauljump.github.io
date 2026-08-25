@@ -6,12 +6,12 @@
     <title>Paul Jump | Selected product cases</title>
     <meta
       name="description"
-      content="Seven product cases: approval readiness, legal AI verification, a fair small-model benchmark, and evidence-backed product systems."
+      content="Eight product cases: approval readiness, legal AI verification, user simulation, a fair small-model benchmark, and evidence-backed product systems."
     />
     <meta property="og:title" content="Paul Jump | Selected product cases" />
     <meta
       property="og:description"
-      content="Seven technical product cases built from live operational problems."
+      content="Eight technical product cases built from live operational problems."
     />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://pauljump.github.io/case/" />
@@ -20,7 +20,7 @@
     <meta name="twitter:title" content="Paul Jump | Selected product cases" />
     <meta
       name="twitter:description"
-      content="Seven technical product cases built from live operational problems."
+      content="Eight technical product cases built from live operational problems."
     />
     <link rel="stylesheet" href="./style.css" />
   </head>
@@ -31,6 +31,7 @@
         <a href="#kit">kit</a>
         <a href="#legal">legal ai</a>
         <a href="#itchy">itchy</a>
+        <a href="#teek">teek</a>
         <a href="#pricefixed">systems</a>
       </nav>
     </header>
@@ -443,9 +444,135 @@
         </div>
       </section>
 
+      <section class="case-study dark" id="teek">
+        <div class="shell case-layout">
+          <aside class="case-index">
+            <span>05</span>
+            <p>evidence → synthetic role → regression loop</p>
+          </aside>
+          <div class="case-body">
+            <p class="project-name">Teek · Simulation and evaluation layer</p>
+            <h2>A synthetic user is only useful if it can disagree with you.</h2>
+            <p class="lede">
+              I needed a way to test the games before asking families to absorb
+              every bad interaction. I pulled together public behavioral and
+              design research, but refused to flatten it into a generic “kid
+              persona” or a clinical score. Teek turns cited evidence into
+              synthetic, constraint-based test roles: a declared situation,
+              task, limits, expected behavior, and the result that would prove
+              the simulation wrong.
+            </p>
+
+            <div class="decision-grid">
+              <div>
+                <p class="eyebrow">The failure mode</p>
+                <h3>Generic QA cannot see the bad experience.</h3>
+                <p>
+                  A click-through can prove that a game launches. It cannot
+                  surface whether a sudden state change, reading-heavy prompt,
+                  unclear goal, or losing mechanic breaks the experience for
+                  the person the game was meant to reach. A plausible-sounding
+                  persona does not solve that either. It just turns a hunch into
+                  a longer prompt.
+                </p>
+              </div>
+              <div>
+                <p class="eyebrow">The product decision</p>
+                <h3>Model the conditions, never a particular child.</h3>
+                <p>
+                  Teek keeps the evidence separate from the test role. The role
+                  can specify an observable constraint such as touch-first
+                  interaction, low tolerance for surprise, an interest-specific
+                  entry point, or recovery after an error. It cannot diagnose,
+                  infer a child’s inner state, or stand in for real user
+                  research. Parent rules remain private inputs, not training
+                  data.
+                </p>
+              </div>
+            </div>
+
+            <div class="teek-stack">
+              <div class="teek-stack-heading">
+                <p class="eyebrow">The simulation stack</p>
+                <p>Evidence determines the role. The role determines the test. The test can fail.</p>
+              </div>
+              <div class="teek-stack-grid">
+                <div>
+                  <span>01</span>
+                  <strong>Bound corpus</strong>
+                  <p>Public research, design material, and authored sources are dated, typed, and preserved with provenance.</p>
+                </div>
+                <div>
+                  <span>02</span>
+                  <strong>Evidence ledger</strong>
+                  <p>Each usable claim carries its exact span, status, confidence, and expiry. Unsupported claims do not compile.</p>
+                </div>
+                <div>
+                  <span>03</span>
+                  <strong>Constraint compiler</strong>
+                  <p>Claims become task conditions: modality, cognitive and sensory load, interest specificity, error recovery, and agency.</p>
+                </div>
+                <div>
+                  <span>04</span>
+                  <strong>Scenario runner</strong>
+                  <p>A run pins the role, product build, initial state, task, and perturbation so the path is reproducible.</p>
+                </div>
+                <div>
+                  <span>05</span>
+                  <strong>Counterexample loop</strong>
+                  <p>Telemetry, parent feedback, or held-out outcomes can invalidate the role. A miss becomes a regression case.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="teek-use">
+              <p class="eyebrow">Where the layer gets used</p>
+              <div class="teek-use-grid">
+                <div>
+                  <span>Kit Studio</span>
+                  <strong>Test the interaction before the family does.</strong>
+                  <p>Roles exercise first-use, surprise, failure, and recovery paths against the game’s parent-defined constraints. The output is a concrete product fix or an explicit question for a real family, never a claim that a child will behave a certain way.</p>
+                </div>
+                <div>
+                  <span>Local legal AI</span>
+                  <strong>Turn “would a firm trust this?” into a testable workflow.</strong>
+                  <p>A synthetic firm card pins the local-data posture, matter shape, source standard, review chain, and escalation threshold. The system then tests whether an answer arrives with the right evidence, refuses when it should, and routes uncertainty to human review.</p>
+                </div>
+                <div>
+                  <span>Every evidence system</span>
+                  <strong>Make field intuition executable.</strong>
+                  <p>The shared pattern is source, constraint, scenario, outcome. Kit uses it for approval-readiness paths; the miners use it to separate a loud anecdote from recurrence; Teek turns the same discipline into a reusable evaluation harness.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="proof-grid teek-proof">
+              <div><strong>1,015</strong><span>sourced corpus documents currently held in the Teek evidence system</span></div>
+              <div><strong>29</strong><span>canonical public decision profiles, plus role cards used for structured rehearsal</span></div>
+              <div><strong>.370</strong><span>identified-versus-masked confidence gap exposed in the first held-out run, above the .25 no-ship threshold</span></div>
+            </div>
+
+            <p class="implementation-note teek-note">
+              The .370 result is the point, not a marketing statistic. When the
+              model was told it was reading Benjamin Franklin, it looked almost
+              perfect. When identity was masked, it fell below the no-ship bar.
+              Teek kept the negative result. The same rule governs the product
+              work: if a simulated role cannot show its evidence and survive a
+              counterexample, it does not get to decide what we build.
+            </p>
+
+            <div class="artifact-links">
+              <a href="https://github.com/pauljump/teek/blob/main/docs/how-to-build-a-mind-model.md" target="_blank" rel="noreferrer">
+                <span>Read the public method and its limits</span><span aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section class="case-study shell work-item" id="pricefixed">
         <aside class="case-index">
-          <span>05</span>
+          <span>06</span>
           <p>fragmented records → shared infrastructure</p>
         </aside>
         <div class="case-body">
@@ -478,7 +605,7 @@
       <section class="case-study dark work-item" id="annoyance">
         <div class="shell case-layout">
           <aside class="case-index">
-            <span>06</span>
+            <span>07</span>
             <p>public complaints → product opportunity corpus</p>
           </aside>
           <div class="case-body">
@@ -506,7 +633,7 @@
 
       <section class="case-study shell work-item" id="openforx">
         <aside class="case-index">
-          <span>07</span>
+          <span>08</span>
           <p>evidence corpus → build-and-release factory</p>
         </aside>
         <div class="case-body">
