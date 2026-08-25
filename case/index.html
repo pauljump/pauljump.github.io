@@ -201,42 +201,56 @@
           </aside>
           <div class="case-body">
             <p class="project-name">Local legal AI · Harvey LAB</p>
-            <h2>An answer is not the product. The verification system is.</h2>
+            <h2>A legal AI pilot is not the product. The transferable method is.</h2>
             <p class="lede">
-              Kit led to a conversation with a small law firm that had banned AI
-              firm-wide. Running a local model addressed their privacy concern,
-              but not the one that mattered: a fluent answer can still miss an
-              issue, cite the wrong provision, or turn uncertainty into
-              confidence. I treated the legal answer as one artifact inside a
-              system that has to show its work.
+              A small law firm had banned cloud AI because its client material
+              could not leave the office. Working with Harvey LAB’s public
+              corpus, I inventoried its 25 practice areas, 1,196 workflow
+              families, 1,749 task scenarios, and 14,061 source documents. The
+              goal was never
+              to prove that one local model could compare two documents. It was
+              to build a provider-neutral method that can carry into any legal
+              area: define the task and accepted output, bind it to the right
+              sources, measure retrieval and omissions separately, then require
+              the system to cite, abstain, or escalate.
             </p>
 
             <div class="decision-grid">
               <div>
-                <p class="eyebrow">What I did not build</p>
-                <h3>A nicer legal chatbot</h3>
+                <p class="eyebrow">What we did not build</p>
+                <h3>A better one-off legal demo</h3>
                 <p>
-                  That would have made a fluent answer easier to produce and a
-                  serious error harder to see. The more useful question was what
-                  has to be true before an AI answer enters a real workflow.
+                  A fluent answer can miss an issue, cite the wrong provision,
+                  or turn uncertainty into confidence. Making that answer easier
+                  to produce would only make a serious error harder to see. The
+                  useful question was what has to be true before any legal AI
+                  result enters a real workflow.
                 </p>
               </div>
               <div>
                 <p class="eyebrow">The product decision</p>
-                <h3>Build the reliability layer around it</h3>
+                <h3>Make the methodology portable, not the prompt</h3>
                 <p>
-                  I mapped 25 practice areas into 1,196 workflow families and
-                  1,749 task scenarios, then built a source-bounded pipeline for
-                  retrieval, reranking, evidence selection, and missing-issue
-                  checks. Every run locks the task, corpus, model, evidence, and
-                  score together so the next failure becomes a benchmark case.
+                  Between practice areas, the task contract, source set, and
+                  acceptance criteria change. The underlying loop does not:
+                  retrieval baseline, reranking, evidence selection,
+                  missing-issue checks, an issue ledger, and a locked answer
+                  before scoring. Every run pins the task, corpus, model,
+                  evidence, and score so the next miss becomes a benchmark case
+                  instead of product lore.
                 </p>
               </div>
             </div>
 
+            <div class="proof-grid legal-corpus-proof">
+              <div><strong>14,061</strong><span>source documents inventoried in the pinned public Harvey LAB corpus</span></div>
+              <div><strong>1,749</strong><span>task scenarios available to turn into bounded, repeatable evaluations</span></div>
+              <div><strong>1,196 / 25</strong><span>workflow families / practice areas covered by the methodology’s starting corpus</span></div>
+            </div>
+
             <div class="metric-steps">
               <div class="metric-heading">
-                <p class="eyebrow">A measurable feedback loop</p>
+                <p class="eyebrow">One development task, instrumented end to end</p>
                 <p>Credit-agreement versus term-sheet comparison · 13 defined provisions</p>
               </div>
               <div class="steps">
@@ -250,9 +264,10 @@
                 Recall@5 moved from 84.6% to 100%. The stricter pairwise verifier
                 selected 11 of 13 correct spans with zero false positives. A
                 composed verifier selected all 13 on this development set. That
-                is not a broad legal-AI claim. It shows the product shape: source
-                retrieval, atomic checks, an issue ledger, and a preserved run
-                record that can make the next evaluation or workflow better.
+                is not a claim that local legal AI is now reliable across law.
+                It proves the methodology: separate search from answer quality,
+                check claims atomically, preserve the issue ledger, and carry
+                the same test shape into the next workflow.
               </p>
             </div>
 
@@ -284,14 +299,16 @@
         </aside>
         <div class="case-body">
           <p class="project-name">Itchy · OpenAI Parameter Golf</p>
-          <h2>Build the benchmark before you believe the model.</h2>
+          <h2>Build the benchmark that lets you abandon the obvious architecture.</h2>
           <p class="lede">
-            The challenge was to build the strongest possible language model in a
-            16 MB artifact. The conventional answer was to shrink a token-based
-            model. I started from the artifact constraint instead: use raw bytes,
-            remove tokenizer overhead, and spend more of the fixed budget on the
-            model. I built the model and the evaluation system together so there
-            was a real comparison, not an architecture story.
+            Parameter Golf asked for the strongest model in a 16 MB artifact,
+            but the question I cared about was larger: could a capable model run
+            locally beside the data that should not leave a machine, like legal
+            files or medical records? More than 600 submissions were optimizing
+            inside the same BPE-transformer neighborhood. I started with a
+            different premise: raw bytes, no tokenizer, and a model built small
+            from birth. Then I wrote the matched benchmark that would let the
+            new approach lose honestly before anyone optimized around it.
           </p>
 
           <div class="decision-grid">
@@ -299,22 +316,25 @@
               <p class="eyebrow">The nontraditional bet</p>
               <h3>Build small from birth</h3>
               <p>
-                I built the model, data pipeline, training loop, quantization
-                path, local MLX implementation, CUDA path, and comparison
-                harness. A 256-byte vocabulary avoided the usual tokenizer and
-                embedding overhead, leaving more of the 16 MB budget for the
-                network itself.
+                The existing leaders had already taught the field how to shave
+                points off the familiar architecture. I built the model, data
+                pipeline, training loop, quantization path, local MLX
+                implementation, CUDA path, and comparison harness around a
+                256-byte vocabulary. No tokenizer or large embedding table meant
+                more of the 16 MB budget could go to the network itself.
               </p>
             </div>
             <div>
               <p class="eyebrow">The product-quality gate</p>
               <h3>Invalidate the exciting result</h3>
               <p>
-                An early patching run looked exceptional. I traced the data flow
-                and found that 11 of every 12 target bytes were visible in the
-                input. I invalidated the result, removed the leakage, and kept
-                the clean rerun beside the original experiment instead of
-                optimizing around a false win.
+                A new architecture is only useful if it has a fair target to
+                optimize against. I held the data, loss, hardware, sequence
+                regime, and artifact budget constant. When an early patching run
+                looked exceptional, I traced the data flow and found that 11 of
+                every 12 target bytes were visible in the input. I invalidated
+                the result, removed the leakage, and kept the clean rerun beside
+                the original instead of optimizing around a false win.
               </p>
             </div>
           </div>
@@ -340,10 +360,10 @@
               The byte-level model finished about 12% behind the token baseline,
               not ahead. That was closer than I expected from a fresh raw-byte
               pipeline operating on longer sequences, but it was not a win. The
-              clean comparison made the next decision clear: focus on the
-              infrastructure gap before claiming an architectural advantage. The
-              leak stayed in the record too, because benchmark integrity was part
-              of the product work.
+              clean comparison made the next decision clear: local, confidential
+              workloads need a better systems path before they need a victory
+              lap. The leak stayed in the record too, because the benchmark was
+              the product work, not a step before it.
             </p>
           </div>
 
@@ -570,42 +590,10 @@
         </div>
       </section>
 
-      <section class="case-study shell work-item" id="pricefixed">
-        <aside class="case-index">
-          <span>06</span>
-          <p>fragmented records → shared infrastructure</p>
-        </aside>
-        <div class="case-body">
-          <p class="project-name">PriceFixed · NYC housing registry</p>
-          <h2>Build the unit record that every housing product is missing.</h2>
-          <p class="lede">
-            I kept hitting the same limit in housing products. There was no
-            trustworthy record for a specific apartment and its history, so every
-            new product started by reconstructing the same address, unit, owner,
-            rent, and listing data from scratch. PriceFixed is the evidence-bound
-            record underneath that work.
-          </p>
-          <div class="work-rail">
-            <p class="eyebrow">The system</p>
-            <p>Public record and listing capture <span>→</span> deterministic building and unit resolution <span>→</span> evidence check <span>→</span> versioned registry <span>→</span> explicit coverage and gap queue.</p>
-          </div>
-          <div class="proof-grid">
-            <div><strong>3.15M</strong><span>canonical NYC unit identities</span></div>
-            <div><strong>1.97M</strong><span>exact-addressable units kept separate from inferred coverage</span></div>
-            <div><strong>1.15M</strong><span>normalized building records in the registry backbone</span></div>
-          </div>
-          <div class="artifact-links">
-            <a href="https://github.com/pauljump/pricefixed" target="_blank" rel="noreferrer">
-              <span>Open the public project</span><span aria-hidden="true">↗</span>
-            </a>
-          </div>
-        </div>
-      </section>
-
       <section class="case-study dark work-item" id="annoyance">
         <div class="shell case-layout">
           <aside class="case-index">
-            <span>07</span>
+            <span>06</span>
             <p>public complaints → product opportunity corpus</p>
           </aside>
           <div class="case-body">
@@ -633,19 +621,22 @@
 
       <section class="case-study shell work-item" id="openforx">
         <aside class="case-index">
-          <span>08</span>
+          <span>07</span>
           <p>evidence corpus → build-and-release factory</p>
         </aside>
         <div class="case-body">
           <p class="project-name">Open for X · Replacement-app factory</p>
           <h2>Start with the bad experience, then make the smallest better product.</h2>
           <p class="lede">
-            This began with a very dad-specific frustration: so many simple apps
-            are built around ads, subscriptions, interruptions, and basic
-            unreliability. Open for X is the public product layer on top of the
-            miner. It takes recurring evidence, narrows it to a believable first
-            version, and shows whether the work has actually reached TestFlight
-            or a live release.
+            Through my board work with the Simons Foundation, I kept hearing a
+            version of the same problem from families: a child cannot tolerate
+            the ads, interruptions, or surprise mechanics in a supposedly simple
+            app, and the ad-free alternative costs money that is not always there.
+            It is annoying for everyone, but especially bad for neurodivergent
+            kids. These replacements can often be built in an hour. The harder
+            question was which ones actually deserved a factory. Open for X turns
+            recurring, source-backed complaints into the narrow brief, free
+            product, and release path worth building next.
           </p>
           <div class="work-rail">
             <p class="eyebrow">The system</p>
@@ -659,6 +650,40 @@
           <div class="artifact-links">
             <a href="https://openforx.polyfeeds.dev" target="_blank" rel="noreferrer">
               <span>Open the live replacement-app factory</span><span aria-hidden="true">↗</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="case-study shell work-item" id="pricefixed">
+        <aside class="case-index">
+          <span>08</span>
+          <p>fragmented records → shared infrastructure</p>
+        </aside>
+        <div class="case-body">
+          <p class="project-name">PriceFixed · NYC housing registry</p>
+          <h2>Transparency is the product. The unit record is the infrastructure.</h2>
+          <p class="lede">
+            PriceFixed is a hobby project with a serious aim: make housing less
+            opaque. Renters make high-stakes decisions with the weakest data in
+            the market, while landlord-side pricing tools and fragmented records
+            keep unit history, ownership, listing changes, and rent context hard
+            to see. I started building a durable, public record for the unit
+            itself. The registry work matters because every transparency product
+            otherwise has to rebuild the same evidence from scratch.
+          </p>
+          <div class="work-rail">
+            <p class="eyebrow">The system</p>
+            <p>Public record and listing capture <span>→</span> deterministic building and unit resolution <span>→</span> evidence check <span>→</span> versioned registry <span>→</span> explicit coverage and gap queue.</p>
+          </div>
+          <div class="proof-grid">
+            <div><strong>3.15M</strong><span>canonical NYC unit identities</span></div>
+            <div><strong>1.97M</strong><span>exact-addressable units kept separate from inferred coverage</span></div>
+            <div><strong>1.15M</strong><span>normalized building records in the registry backbone</span></div>
+          </div>
+          <div class="artifact-links">
+            <a href="https://github.com/pauljump/pricefixed" target="_blank" rel="noreferrer">
+              <span>Open the public project</span><span aria-hidden="true">↗</span>
             </a>
           </div>
         </div>
