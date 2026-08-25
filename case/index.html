@@ -699,5 +699,139 @@
         <a href="https://x.com/paulljump">x ↗</a>
       </div>
     </footer>
+    <script>
+      (function () {
+        var host = window.location.hostname;
+        if (host === "localhost" || host === "127.0.0.1") return;
+
+        var endpoint = "https://pulse.polyfeeds.dev/api/ingest";
+        var property = "pauljump-case";
+        var visitorKey = "pulse_visitor_id";
+        var landingKey = "pulse_landing_path";
+        var enteredAt = Date.now();
+        var dwellSent = false;
+
+        function cleanPath(path) {
+          return (path || "/").split("?")[0].split("#")[0] || "/";
+        }
+
+        function cleanReferrer(referrer) {
+          if (!referrer) return undefined;
+          try {
+            var url = new URL(referrer);
+            return url.origin + cleanPath(url.pathname);
+          } catch (_) {
+            return undefined;
+          }
+        }
+
+        function visitorId() {
+          try {
+            var id = window.localStorage.getItem(visitorKey);
+            if (!id) {
+              id = window.crypto && window.crypto.randomUUID
+                ? window.crypto.randomUUID()
+                : Date.now() + "-" + Math.random().toString(36).slice(2);
+              window.localStorage.setItem(visitorKey, id);
+            }
+            return id;
+          } catch (_) {
+            return undefined;
+          }
+        }
+
+        function landingPath() {
+          var current = cleanPath(window.location.pathname);
+          try {
+            var saved = window.sessionStorage.getItem(landingKey);
+            if (saved) return saved;
+            window.sessionStorage.setItem(landingKey, current);
+          } catch (_) {}
+          return current;
+        }
+
+        function attribution() {
+          var params = new URLSearchParams(window.location.search);
+          return {
+            source: params.get("utm_source") || undefined,
+            medium: params.get("utm_medium") || undefined,
+            campaign: params.get("utm_campaign") || undefined,
+            term: params.get("utm_term") || undefined,
+            content: params.get("utm_content") || undefined,
+          };
+        }
+
+        function payload(event, extra) {
+          return JSON.stringify(Object.assign({
+            property: property,
+            event: event,
+            path: cleanPath(window.location.pathname),
+            referrer: cleanReferrer(document.referrer),
+            landingPath: landingPath(),
+            visitorId: visitorId(),
+            screen: window.innerWidth + "x" + window.innerHeight,
+          }, attribution(), extra || {}));
+        }
+
+        function send(event, extra) {
+          try {
+            var body = payload(event, extra);
+            if (navigator.sendBeacon) {
+              navigator.sendBeacon(endpoint, new Blob([body], { type: "text/plain" }));
+              return;
+            }
+            fetch(endpoint, {
+              method: "POST",
+              headers: { "Content-Type": "text/plain" },
+              keepalive: true,
+              body: body,
+            }).catch(function () {});
+          } catch (_) {}
+        }
+
+        send("page_view");
+
+        function sendDwell() {
+          if (dwellSent) return;
+          dwellSent = true;
+          send("page_dwell", { dwellMs: Date.now() - enteredAt });
+        }
+
+        document.addEventListener("visibilitychange", function () {
+          if (document.visibilityState === "hidden") sendDwell();
+        });
+        window.addEventListener("pagehide", sendDwell);
+
+        document.addEventListener("click", function (event) {
+          var link = event.target && event.target.closest && event.target.closest("a[href]");
+          if (!link) return;
+          try {
+            var target = new URL(link.href, window.location.href);
+            if (target.protocol !== "http:" && target.protocol !== "https:") return;
+            if (target.origin === window.location.origin) return;
+            send("outbound_link", {
+              targetHost: target.hostname,
+              targetPath: cleanPath(target.pathname),
+              linkLabel: (link.textContent || "").trim().slice(0, 120) || undefined,
+            });
+          } catch (_) {}
+        });
+
+        if ("IntersectionObserver" in window) {
+          var viewed = {};
+          var observer = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+              if (!entry.isIntersecting || viewed[entry.target.id]) return;
+              viewed[entry.target.id] = true;
+              send("case_view", { caseId: entry.target.id });
+              observer.unobserve(entry.target);
+            });
+          }, { threshold: 0.5 });
+          document.querySelectorAll(".case-study[id]").forEach(function (section) {
+            observer.observe(section);
+          });
+        }
+      })();
+    </script>
   </body>
 </html>
