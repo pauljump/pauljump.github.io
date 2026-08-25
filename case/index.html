@@ -31,7 +31,7 @@
         <a href="#kit">kit</a>
         <a href="#legal">legal ai</a>
         <a href="#itchy">itchy</a>
-        <a href="#more">more</a>
+        <a href="#pricefixed">systems</a>
       </nav>
     </header>
 
@@ -442,61 +442,97 @@
         </div>
       </section>
 
-      <section class="more-systems shell" id="more">
-        <p class="eyebrow">Other systems</p>
-        <h2>Four more examples of the same instinct.</h2>
-        <div class="systems-grid">
-          <article class="system-card featured-system">
-            <p class="project-name">PriceFixed · NYC housing registry</p>
-            <h3>Build the unit record that every housing product is missing.</h3>
-            <p>
-              I kept running into the same limit in housing products: there is no
-              trustworthy record for a specific apartment and its history. So I
-              built a local-first, evidence-bound registry that joins public
-              records and listing evidence without turning inferred units into
-              facts. Every accepted record retains its source, retrieval time,
-              hash, stable ID, and versioned merge history.
-            </p>
-            <div class="system-statline"><strong>3.15M</strong><span>canonical units · 1.97M exact-addressable units · 516,075 address rows</span></div>
-            <a class="card-link" href="https://github.com/pauljump/pricefixed" target="_blank" rel="noreferrer">Open the public project <span aria-hidden="true">↗</span></a>
-          </article>
+      <section class="case-study shell work-item" id="pricefixed">
+        <aside class="case-index">
+          <span>05</span>
+          <p>fragmented records → shared infrastructure</p>
+        </aside>
+        <div class="case-body">
+          <p class="project-name">PriceFixed · NYC housing registry</p>
+          <h2>Build the unit record that every housing product is missing.</h2>
+          <p class="lede">
+            I kept hitting the same limit in housing products. There was no
+            trustworthy record for a specific apartment and its history, so every
+            new product started by reconstructing the same address, unit, owner,
+            rent, and listing data from scratch. PriceFixed is the evidence-bound
+            record underneath that work.
+          </p>
+          <div class="work-rail">
+            <p class="eyebrow">The system</p>
+            <p>Public record and listing capture <span>→</span> deterministic building and unit resolution <span>→</span> evidence check <span>→</span> versioned registry <span>→</span> explicit coverage and gap queue.</p>
+          </div>
+          <div class="proof-grid">
+            <div><strong>3.15M</strong><span>canonical NYC unit identities</span></div>
+            <div><strong>1.97M</strong><span>exact-addressable units kept separate from inferred coverage</span></div>
+            <div><strong>516,075</strong><span>address records with source, hash, and versioned merge history</span></div>
+          </div>
+          <div class="artifact-links">
+            <a href="https://github.com/pauljump/pricefixed" target="_blank" rel="noreferrer">
+              <span>Open the public project</span><span aria-hidden="true">↗</span>
+            </a>
+          </div>
+        </div>
+      </section>
 
-          <article class="system-card">
+      <section class="case-study dark work-item" id="annoyance">
+        <div class="shell case-layout">
+          <aside class="case-index">
+            <span>06</span>
+            <p>public complaints → product opportunity corpus</p>
+          </aside>
+          <div class="case-body">
             <p class="project-name">Annoyance Miner · Research infrastructure</p>
-            <h3>Turn complaints into a durable product-opportunity corpus.</h3>
-            <p>
-              A source-aware mining system that works from preserved public
-              complaint pages, records the literal annoyance and its provenance,
-              then deduplicates and classifies the underlying problem before a
-              product brief exists.
+            <h2>A complaint is not an opportunity until it survives the evidence.</h2>
+            <p class="lede">
+              Product ideas too often start from a loud anecdote. I built an
+              archive-first mining system to preserve the literal complaint,
+              source, date, and context before anyone turns it into a solution.
+              It separates repeated, fixable friction from a good story about a
+              one-off annoyance.
             </p>
-            <div class="system-statline"><strong>4,151</strong><span>provenance-tracked annoyance records in the current mining state</span></div>
-          </article>
+            <div class="work-rail">
+              <p class="eyebrow">The system</p>
+              <p>Preserved public page <span>→</span> raw complaint extraction <span>→</span> alias and root-problem resolution <span>→</span> source-linked candidate <span>→</span> evidence-backed product brief.</p>
+            </div>
+            <div class="proof-grid">
+              <div><strong>4,151</strong><span>provenance-tracked annoyances in the current mining state</span></div>
+              <div><strong>3,240</strong><span>auditable archive cells in the San Francisco historical mining plan</span></div>
+              <div><strong>0</strong><span>account-linked scraping. The corpus is built from public archive captures.</span></div>
+            </div>
+          </div>
+        </div>
+      </section>
 
-          <article class="system-card">
-            <p class="project-name">Unignorable · NYC public-record routing</p>
-            <h3>Make an uncertain civic record useful without pretending it is certain.</h3>
-            <p>
-              A map and routing system that combines public layers with a
-              time-decaying condition model. It distinguishes a report from a
-              real-world observation, preserves uncertainty, and only makes a
-              route exclusion when the evidence crosses a disclosed threshold.
-            </p>
-            <a class="card-link" href="https://unignorable.polyfeeds.dev" target="_blank" rel="noreferrer">Open the live map <span aria-hidden="true">↗</span></a>
-          </article>
-
-          <article class="system-card">
-            <p class="project-name">Open for X · Replacement-app factory</p>
-            <h3>Start with the bad experience, then make the smallest better product.</h3>
-            <p>
-              This started as a dad’s irritation with apps built around ads,
-              subscriptions, interruptions, and basic unreliability. It turns
-              mined App Store complaints into source-backed replacement briefs,
-              then tracks what has actually moved from idea to TestFlight.
-            </p>
-            <div class="system-statline"><strong>1,970</strong><span>reviews across 80 source apps · 133 verified evidence receipts</span></div>
-            <a class="card-link" href="https://openforx.polyfeeds.dev" target="_blank" rel="noreferrer">Open the live factory <span aria-hidden="true">↗</span></a>
-          </article>
+      <section class="case-study shell work-item" id="openforx">
+        <aside class="case-index">
+          <span>07</span>
+          <p>evidence corpus → build-and-release factory</p>
+        </aside>
+        <div class="case-body">
+          <p class="project-name">Open for X · Replacement-app factory</p>
+          <h2>Start with the bad experience, then make the smallest better product.</h2>
+          <p class="lede">
+            This began with a very dad-specific frustration: so many simple apps
+            are built around ads, subscriptions, interruptions, and basic
+            unreliability. Open for X is the public product layer on top of the
+            miner. It takes recurring evidence, narrows it to a believable first
+            version, and shows whether the work has actually reached TestFlight
+            or a live release.
+          </p>
+          <div class="work-rail">
+            <p class="eyebrow">The system</p>
+            <p>Review evidence <span>→</span> deduplicated failure pattern <span>→</span> narrow replacement brief <span>→</span> build status <span>→</span> field signal for the next version.</p>
+          </div>
+          <div class="proof-grid">
+            <div><strong>1,970</strong><span>reviews retained as source evidence</span></div>
+            <div><strong>80</strong><span>source apps represented in the current public corpus</span></div>
+            <div><strong>133</strong><span>verified evidence receipts behind 25 replacement-app briefs</span></div>
+          </div>
+          <div class="artifact-links">
+            <a href="https://openforx.polyfeeds.dev" target="_blank" rel="noreferrer">
+              <span>Open the live replacement-app factory</span><span aria-hidden="true">↗</span>
+            </a>
+          </div>
         </div>
       </section>
 
