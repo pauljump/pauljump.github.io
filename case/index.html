@@ -709,7 +709,10 @@
         var visitorKey = "pulse_visitor_id";
         var landingKey = "pulse_landing_path";
         var enteredAt = Date.now();
-        var dwellSent = false;
+        var activeMs = 0;
+        var activeSince = document.visibilityState === "visible" ? enteredAt : null;
+        var lastDwellMs = -1;
+        var maxDepthPct = 0;
 
         function cleanPath(path) {
           return (path || "/").split("?")[0].split("#")[0] || "/";
@@ -792,16 +795,80 @@
 
         send("page_view");
 
-        function sendDwell() {
-          if (dwellSent) return;
-          dwellSent = true;
-          send("page_dwell", { dwellMs: Date.now() - enteredAt });
+        // Active time only: the clock pauses whenever the tab is hidden, so a
+        // reader who switches away and comes back is not truncated at the first
+        // switch. Each report carries the running total; take the max per visit.
+        function activeTotal() {
+          return activeMs + (activeSince ? Date.now() - activeSince : 0);
+        }
+
+        function sendDwell(final) {
+          var total = activeTotal();
+          if (total <= lastDwellMs + (final ? 0 : 1000)) return;
+          lastDwellMs = total;
+          send("page_dwell", {
+            dwellMs: total,
+            elapsedMs: Date.now() - enteredAt,
+            maxDepthPct: maxDepthPct,
+            final: final || undefined,
+          });
         }
 
         document.addEventListener("visibilitychange", function () {
-          if (document.visibilityState === "hidden") sendDwell();
+          if (document.visibilityState === "hidden") {
+            if (activeSince) {
+              activeMs += Date.now() - activeSince;
+              activeSince = null;
+            }
+            sendDwell(false);
+          } else if (!activeSince) {
+            activeSince = Date.now();
+          }
         });
-        window.addEventListener("pagehide", sendDwell);
+
+        window.addEventListener("pagehide", function () {
+          if (activeSince) {
+            activeMs += Date.now() - activeSince;
+            activeSince = null;
+          }
+          sendDwell(true);
+        });
+
+        // Document-level scroll depth. Section visibility alone cannot answer
+        // "how far did they get" when a section is taller than the viewport.
+        var depthMarks = [25, 50, 75, 100];
+        var depthSent = {};
+        var depthTicking = false;
+
+        function depthPct() {
+          var doc = document.documentElement;
+          var height = doc.scrollHeight;
+          if (height <= window.innerHeight) return 100;
+          var seen = (window.scrollY || doc.scrollTop || 0) + window.innerHeight;
+          return Math.max(0, Math.min(100, Math.round((seen / height) * 100)));
+        }
+
+        function checkDepth() {
+          var pct = depthPct();
+          if (pct > maxDepthPct) maxDepthPct = pct;
+          depthMarks.forEach(function (mark) {
+            if (maxDepthPct >= mark && !depthSent[mark]) {
+              depthSent[mark] = true;
+              send("scroll_depth:" + mark, { pct: maxDepthPct });
+            }
+          });
+        }
+
+        window.addEventListener("scroll", function () {
+          if (depthTicking) return;
+          depthTicking = true;
+          window.requestAnimationFrame(function () {
+            depthTicking = false;
+            checkDepth();
+          });
+        }, { passive: true });
+
+        checkDepth();
 
         document.addEventListener("click", function (event) {
           var link = event.target && event.target.closest && event.target.closest("a[href]");
@@ -822,14 +889,20 @@
           var viewed = {};
           var observer = new IntersectionObserver(function (entries) {
             entries.forEach(function (entry) {
-              if (!entry.isIntersecting || viewed[entry.target.id]) return;
-              viewed[entry.target.id] = true;
-              send("case_view:" + entry.target.id);
+              var caseId = entry.target.getAttribute("data-case-id");
+              if (!entry.isIntersecting || !caseId || viewed[caseId]) return;
+              viewed[caseId] = true;
+              send("case_view:" + caseId, { depthPct: maxDepthPct });
               observer.unobserve(entry.target);
             });
           }, { threshold: 0.5 });
+          // Observe each case study's heading, not the section box. Sections run
+          // 1200-2300px tall, so at a typical viewport they can never reach 50%
+          // visibility and would never report.
           document.querySelectorAll(".case-study[id]").forEach(function (section) {
-            observer.observe(section);
+            var sentinel = section.querySelector("h2") || section;
+            sentinel.setAttribute("data-case-id", section.id);
+            observer.observe(sentinel);
           });
         }
       })();
