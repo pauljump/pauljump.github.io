@@ -1,0 +1,912 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>The constraint is ground truth — Paul Jump</title>
+    <meta
+      name="description"
+      content="AI's binding constraint in a regulated business is not model capability. It is the rate at which you can manufacture trustworthy ground truth. A thesis, and a working proof."
+    />
+    <meta name="robots" content="noindex" />
+    <meta property="og:title" content="The constraint is ground truth" />
+    <meta
+      property="og:description"
+      content="Every AI feature you ship adds surface area for being confidently wrong. A thesis about what actually caps that, and a working system built to be wrong out loud."
+    />
+    <meta property="og:type" content="website" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%2318221d'/%3E%3Crect x='18' y='7' width='7' height='7' fill='%23ff6b35'/%3E%3C/svg%3E"
+    />
+
+    <style>
+      :root {
+        color-scheme: light;
+        --paper: #f4f0e8;
+        --paper-deep: #ece5d9;
+        --card: #fffdf8;
+        --ink: #18221d;
+        --muted: #68716c;
+        --line: #d7d0c4;
+        --line-strong: #b9b0a0;
+        --orange: #ff6b35;
+        --mint-dark: #155c38;
+        --mint-bg: #e4f7ec;
+        --amber: #8a6a12;
+        --amber-bg: #f7edd2;
+        --red: #7a4a4a;
+        --red-bg: #f6e9e9;
+        --sans: Arial, Helvetica, "Helvetica Neue", system-ui, sans-serif;
+        --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      }
+      * { box-sizing: border-box; }
+      html { scroll-snap-type: y mandatory; scroll-behavior: smooth; }
+      body {
+        margin: 0;
+        background: var(--paper);
+        color: var(--ink);
+        font-family: var(--sans);
+        font-size: 16px;
+        line-height: 1.5;
+        -webkit-font-smoothing: antialiased;
+      }
+      a { color: inherit; }
+      a:focus-visible, button:focus-visible {
+        outline: 2px solid var(--orange);
+        outline-offset: 3px;
+      }
+
+      /* ---------- slide frame ---------- */
+      section.slide {
+        min-height: 100svh;
+        scroll-snap-align: start;
+        scroll-snap-stop: always;
+        display: flex;
+        align-items: center;
+        border-bottom: 1px solid var(--line);
+        padding: 74px 0 58px;
+        position: relative;
+      }
+      .shell { width: min(1000px, calc(100% - 48px)); margin: 0 auto; }
+
+      /* ---------- chrome ---------- */
+      .rail {
+        position: fixed; top: 0; left: 0; right: 0; height: 3px;
+        background: transparent; z-index: 50; pointer-events: none;
+      }
+      .rail > i { display: block; height: 100%; width: 0; background: var(--orange); transition: width 140ms linear; }
+      .hud {
+        position: fixed; bottom: 14px; right: 16px; z-index: 50;
+        display: flex; align-items: center; gap: 10px;
+        font-size: 12px; font-weight: 700; color: var(--muted);
+        background: rgba(244,240,232,.9); border: 1px solid var(--line-strong);
+        padding: 5px 9px; backdrop-filter: blur(6px);
+      }
+      .hud button {
+        font: inherit; font-size: 13px; line-height: 1;
+        background: transparent; border: 1px solid var(--line-strong);
+        color: var(--ink); padding: 4px 8px; cursor: pointer;
+      }
+      .hud button:hover { background: var(--card); }
+      .brandmark {
+        position: fixed; top: 14px; left: 18px; z-index: 50;
+        font-size: 12px; font-weight: 700; letter-spacing: -0.01em;
+        color: var(--muted); text-decoration: none;
+      }
+      .brandmark:hover { color: var(--ink); }
+      @media (max-width: 700px) { .brandmark { display: none; } }
+
+      /* ---------- type ---------- */
+      .kicker {
+        font-size: 11px; font-weight: 800; letter-spacing: 0.15em;
+        text-transform: uppercase; color: var(--mint-dark); margin: 0 0 18px;
+      }
+      h1 {
+        font-size: clamp(34px, 5.6vw, 68px); line-height: 1.02;
+        letter-spacing: -0.04em; font-weight: 700; margin: 0 0 20px; max-width: 17ch;
+      }
+      h2 {
+        font-size: clamp(26px, 3.6vw, 42px); line-height: 1.08;
+        letter-spacing: -0.033em; font-weight: 700; margin: 0 0 18px; max-width: 20ch;
+      }
+      h3 { font-size: 16px; font-weight: 700; margin: 0 0 6px; letter-spacing: -0.01em; }
+      p { margin: 0 0 14px; }
+      .lede { font-size: clamp(17px, 1.85vw, 21px); line-height: 1.45; max-width: 60ch; color: #333c36; }
+      .small { font-size: 14px; }
+      .tiny { font-size: 12.5px; }
+      .muted { color: var(--muted); }
+      strong.hl { background: var(--mint-bg); padding: 0 3px; }
+      .pull {
+        font-size: clamp(22px, 3vw, 34px); line-height: 1.2; letter-spacing: -0.025em;
+        font-weight: 700; max-width: 26ch; border-left: 4px solid var(--orange);
+        padding-left: 22px; margin: 0;
+      }
+
+      /* ---------- layout ---------- */
+      .two { display: grid; grid-template-columns: minmax(0,1.05fr) minmax(0,.95fr); gap: 44px; align-items: start; }
+      .cards { display: grid; gap: 0; border-top: 1px solid var(--line-strong); border-left: 1px solid var(--line-strong); }
+      .c2 { grid-template-columns: repeat(auto-fit, minmax(240px,1fr)); }
+      .c3 { grid-template-columns: repeat(auto-fit, minmax(210px,1fr)); }
+      .cell {
+        border-right: 1px solid var(--line-strong); border-bottom: 1px solid var(--line-strong);
+        padding: 17px; background: var(--card);
+      }
+      @media (max-width: 780px) { .two { grid-template-columns: 1fr; gap: 26px; } }
+
+      ul.plain { margin: 0 0 14px; padding-left: 19px; }
+      ul.plain li { margin-bottom: 8px; }
+      ul.rows { list-style: none; margin: 0; padding: 0; }
+      ul.rows li { padding: 11px 0; border-bottom: 1px solid var(--line); font-size: 15px; }
+      ul.rows li:last-child { border-bottom: none; }
+
+      .tag {
+        display: inline-block; font-size: 10.5px; font-weight: 800; letter-spacing: 0.05em;
+        text-transform: uppercase; padding: 3px 7px; border: 1px solid currentColor;
+      }
+      .tag.good { color: var(--mint-dark); background: var(--mint-bg); }
+      .tag.warn { color: var(--amber); background: var(--amber-bg); }
+      .tag.bad { color: var(--red); background: var(--red-bg); }
+      .tag.flat { color: var(--muted); background: var(--paper-deep); }
+
+      .num { font-family: var(--mono); font-size: 12px; color: var(--muted); }
+      .refusal { border: 1px solid var(--line-strong); background: var(--card); padding: 14px 16px; margin-bottom: -1px; }
+      .refusal .q { font-weight: 700; font-size: 15px; margin-bottom: 4px; }
+      .refusal .a { font-size: 13.5px; color: #3c443e; margin: 0; }
+
+      .flow { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px,1fr)); gap: 0;
+              border-top: 1px solid var(--ink); border-left: 1px solid var(--line-strong); }
+      .flow > div { border-right: 1px solid var(--line-strong); border-bottom: 1px solid var(--line-strong);
+                    padding: 14px; background: var(--card); }
+      .flow .n { font-family: var(--mono); font-size: 11px; color: var(--orange); font-weight: 700; }
+
+      /* ---------- final CTA ---------- */
+      section.finale { background: var(--ink); color: #f4f0e8; border-bottom: none; }
+      section.finale .kicker { color: #9fe3bd; }
+      section.finale .muted { color: #9aa39c; }
+      .megalink {
+        display: block; text-decoration: none; color: #fff;
+        border: 2px solid var(--orange); background: var(--orange);
+        padding: clamp(26px, 4vw, 46px) clamp(22px, 4vw, 40px);
+        margin: 26px 0 18px; transition: transform 160ms ease, background 160ms ease;
+      }
+      .megalink:hover { background: #e85c28; transform: translateY(-3px); }
+      .megalink .go { font-size: 12px; font-weight: 800; letter-spacing: 0.16em; text-transform: uppercase; opacity: .92; }
+      .megalink .url {
+        display: block; font-size: clamp(28px, 6.4vw, 74px); line-height: 1;
+        letter-spacing: -0.045em; font-weight: 700; margin: 12px 0 10px; word-break: break-word;
+      }
+      .megalink .sub { font-size: clamp(14px, 1.6vw, 17px); opacity: .95; max-width: 54ch; }
+
+      @media (prefers-reduced-motion: reduce) {
+        html { scroll-behavior: auto; }
+        .megalink { transition: none; }
+      }
+      @media print {
+        html { scroll-snap-type: none; }
+        section.slide { min-height: auto; page-break-after: always; padding: 24px 0; }
+        .hud, .rail, .brandmark { display: none; }
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="rail"><i id="railfill"></i></div>
+    <a class="brandmark" href="https://pauljump.github.io/case/">paul jump</a>
+    <div class="hud">
+      <button id="prev" aria-label="Previous slide">←</button>
+      <span><span id="cur">1</span>/<span id="tot">15</span></span>
+      <button id="next" aria-label="Next slide">→</button>
+    </div>
+
+    <!-- 01 -->
+    <section class="slide" id="s1" data-slide="1" data-name="title">
+      <div class="shell">
+        <p class="kicker">A thesis, and a working proof</p>
+        <h1>The constraint is not the model. It is the ground truth.</h1>
+        <p class="lede">
+          Every AI feature shipped into a regulated workflow adds surface area for being confidently
+          wrong. What caps that is not how smart the model gets. It is how fast the company can
+          manufacture truth it is willing to stand behind.
+        </p>
+        <p class="tiny muted" style="margin-top:22px">
+          Paul Jump · outside view, built from public sources · use ↓ or → to move
+        </p>
+      </div>
+    </section>
+
+    <!-- 02 -->
+    <section class="slide" id="s2" data-slide="2" data-name="what-is-sold">
+      <div class="shell">
+        <p class="kicker">Start here</p>
+        <h2>The product was never the software.</h2>
+        <div class="two">
+          <div>
+            <p class="lede">
+              People do not buy tax software. They buy a sentence:
+              <strong class="hl">someone will stand behind this number.</strong>
+            </p>
+            <p class="lede">
+              Accuracy guarantees. Audit support. Maximum refund promises. Those are not marketing
+              wrappers around the product — they are the product. The software is the delivery
+              mechanism for a liability someone else agreed to carry.
+            </p>
+          </div>
+          <div class="cards c2">
+            <div class="cell">
+              <h3>What a customer is actually buying</h3>
+              <p class="small muted" style="margin:0">
+                Permission to stop worrying about a decision they cannot personally verify.
+              </p>
+            </div>
+            <div class="cell">
+              <h3>What that makes the asset</h3>
+              <p class="small muted" style="margin:0">
+                Not the interface. The willingness — and the ability — to be accountable for an answer.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 03 -->
+    <section class="slide" id="s3" data-slide="3" data-name="asymmetry">
+      <div class="shell">
+        <p class="kicker">The asymmetry nobody prices correctly</p>
+        <h2>99% right is not worth 99%.</h2>
+        <div class="two">
+          <div>
+            <p class="lede">
+              For drafting an email, a 1% error rate is a rounding error — you can see the mistake and
+              fix it in two seconds.
+            </p>
+            <p class="lede">
+              For a tax position, a benefits claim, or a filing deadline, the user
+              <strong class="hl">cannot tell which 1% they are in.</strong> So the value of the whole
+              system collapses toward the value of its worst answer. Trust is not linear in accuracy.
+            </p>
+            <p class="small muted">
+              This is why the same model that is transformative in a writing tool is a liability in a
+              compliance workflow, with no change to the model at all.
+            </p>
+          </div>
+          <div class="cards c2">
+            <div class="cell">
+              <span class="tag good">recoverable</span>
+              <h3 style="margin-top:10px">Wrong draft email</h3>
+              <p class="small muted" style="margin:0">Visible, instant, free to fix.</p>
+            </div>
+            <div class="cell">
+              <span class="tag bad">not recoverable</span>
+              <h3 style="margin-top:10px">Wrong filing position</h3>
+              <p class="small muted" style="margin:0">
+                Invisible at the moment of harm. Surfaces months later, addressed to the customer, in an
+                envelope with a deadline on it.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 04 -->
+    <section class="slide" id="s4" data-slide="4" data-name="reframe">
+      <div class="shell">
+        <p class="kicker">The reframe</p>
+        <p class="pull">
+          Model capability is improving on somebody else's roadmap and somebody else's budget. Ground
+          truth about what the rules are, when they changed, and which ones died is not.
+        </p>
+        <div style="margin-top:30px" class="two">
+          <div>
+            <p class="lede">
+              Frontier capability is a rising tide that lifts every competitor at the same time. It is
+              not a moat and it was never going to be one.
+            </p>
+            <p class="lede">
+              <strong class="hl">A structured, citable, drift-watched body of truth about a specific
+              regulated domain is the only part of the stack that is durably yours</strong> — because
+              nobody else is building yours, and it compounds every time a rule moves.
+            </p>
+          </div>
+          <div>
+            <ul class="rows">
+              <li><strong>Bought, not built</strong> — model weights, context length, inference cost</li>
+              <li><strong>Built, and only by you</strong> — what the rule is, what it means for this
+                customer, what changed last quarter, and what you are willing to say out loud</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 05 -->
+    <section class="slide" id="s5" data-slide="5" data-name="where-truth-lives">
+      <div class="shell">
+        <p class="kicker">An outsider's hypothesis — stated as a question, not a claim</p>
+        <h2>Where does truth live today, and can it feed an agent?</h2>
+        <p class="lede">
+          In most companies of this shape, the answer to "what is the rule?" lives in three places, none
+          of which an agent can query:
+        </p>
+        <div class="cards c3" style="margin: 18px 0 20px">
+          <div class="cell">
+            <span class="tag flat">place 1</span>
+            <h3 style="margin-top:10px">Content</h3>
+            <p class="small muted" style="margin:0">
+              Prose written for a human reader. Authoritative, and structurally unusable as a machine
+              precondition.
+            </p>
+          </div>
+          <div class="cell">
+            <span class="tag flat">place 2</span>
+            <h3 style="margin-top:10px">Expert heads</h3>
+            <p class="small muted" style="margin:0">
+              The most valuable version, and the only one that never gets written down. It walks out at
+              5pm and retires eventually.
+            </p>
+          </div>
+          <div class="cell">
+            <span class="tag flat">place 3</span>
+            <h3 style="margin-top:10px">Code</h3>
+            <p class="small muted" style="margin:0">
+              Precise, and silent about its own provenance. It can tell you the answer but not why, or
+              when it stopped being right.
+            </p>
+          </div>
+        </div>
+        <p class="small muted">
+          I am not claiming to know your internals. I am claiming this is the default shape everywhere,
+          and that it is the actual thing standing between an AI roadmap and a shippable one. If it is
+          already solved, that is the first thing I would want to be wrong about.
+        </p>
+      </div>
+    </section>
+
+    <!-- 06 -->
+    <section class="slide" id="s6" data-slide="6" data-name="asset-shape">
+      <div class="shell">
+        <p class="kicker">What "ground truth as an asset" actually means</p>
+        <h2>Content is written to be read. Truth has to be written to be checked.</h2>
+        <p class="lede" style="margin-bottom:20px">
+          Same subject matter, completely different object. Every claim carries five things, or the
+          system cannot safely act on it:
+        </p>
+        <div class="cards c3">
+          <div class="cell"><span class="num">01</span><h3 style="margin-top:6px">The atomic claim</h3>
+            <p class="small muted" style="margin:0">One checkable statement. Not a paragraph.</p></div>
+          <div class="cell"><span class="num">02</span><h3 style="margin-top:6px">The verbatim quote and its source</h3>
+            <p class="small muted" style="margin:0">So a human can go read the sentence you relied on.</p></div>
+          <div class="cell"><span class="num">03</span><h3 style="margin-top:6px">The tier</h3>
+            <p class="small muted" style="margin:0">Did we read the issuing authority, or are we summarizing someone who did?</p></div>
+          <div class="cell"><span class="num">04</span><h3 style="margin-top:6px">The effective date</h3>
+            <p class="small muted" style="margin:0">Rules are true for a period, not forever.</p></div>
+          <div class="cell"><span class="num">05</span><h3 style="margin-top:6px">Its life status</h3>
+            <p class="small muted" style="margin:0">Live, superseded, or struck down — never deleted.</p></div>
+          <div class="cell" style="background:var(--paper-deep)">
+            <h3>Then, and only then</h3>
+            <p class="small muted" style="margin:0">
+              A routing contract can bind that claim to a decision and an agent can be allowed to act.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 07 -->
+    <section class="slide" id="s7" data-slide="7" data-name="dead-rules">
+      <div class="shell">
+        <p class="kicker">The sharpest failure, and the least discussed</p>
+        <h2>A corpus that deletes dead rules cannot tell you it was wrong.</h2>
+        <div class="two">
+          <div>
+            <p class="lede">
+              If you remove a rule when it dies, you destroy the difference between
+              <em>we never knew about this</em> and <em>we knew, and it changed.</em>
+            </p>
+            <p class="lede">
+              That is the exact mechanism by which a system becomes confidently wrong. The dead rule
+              leaves no scar, so nothing downstream knows to stop citing it.
+            </p>
+            <p class="small muted">
+              In the system on the last slide, one federal rule in the corpus is a court-vacated 2025
+              regulation. It is retained, tagged, and the generated letter says in its own body that it
+              does not rely on it. That is not a detail. That is the design.
+            </p>
+          </div>
+          <div class="cards c2">
+            <div class="cell">
+              <span class="tag bad">deletes</span>
+              <h3 style="margin-top:10px">Confidently wrong</h3>
+              <p class="small muted" style="margin:0">
+                Generates an authoritative letter resting on a rule that no longer exists. No signal
+                anywhere that anything is off.
+              </p>
+            </div>
+            <div class="cell">
+              <span class="tag good">retains and tags</span>
+              <h3 style="margin-top:10px">Wrong out loud</h3>
+              <p class="small muted" style="margin:0">
+                Knows the rule died, knows the date, and says so in the artifact it hands the customer.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 08 -->
+    <section class="slide" id="s8" data-slide="8" data-name="abstention">
+      <div class="shell">
+        <p class="kicker">The move</p>
+        <h2>Abstention is not governance. It is a product surface.</h2>
+        <p class="lede" style="margin-bottom:18px">
+          The industry treats "knowing when not to answer" as a policy problem — guardrails, evals,
+          human-in-the-loop. Those are review processes. They never reach the customer.
+          <strong class="hl">The refusals are the most trust-generating thing the system does, so they
+          should be the most visible.</strong> Four kinds, each a screen:
+        </p>
+        <div class="refusal">
+          <div class="q">"This protection does not reach your coverage."</div>
+          <p class="a">Scope. Told in ten seconds instead of discovered after two phone calls.</p>
+        </div>
+        <div class="refusal">
+          <div class="q">"That rule was struck down in July 2025, so this does not rely on it."</div>
+          <p class="a">Currency. The system knows what it used to believe.</p>
+        </div>
+        <div class="refusal">
+          <div class="q">"We could not read the agency's own page, so this is a summary, not a quote."</div>
+          <p class="a">Provenance. It distinguishes what it verified from what it inherited.</p>
+        </div>
+        <div class="refusal">
+          <div class="q">"That 120-day window binds the hospital, not you."</div>
+          <p class="a">Direction. A clock restraining the institution is not a deadline you can miss.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 09 -->
+    <section class="slide" id="s9" data-slide="9" data-name="proof-intro">
+      <div class="shell">
+        <p class="kicker">Proof</p>
+        <h2>So I built one, deliberately in a domain you do not operate in.</h2>
+        <div class="two">
+          <div>
+            <p class="lede">
+              If I had built this in tax, we would spend this meeting arguing about my tax content, and
+              the architecture would never come up.
+            </p>
+            <p class="lede">
+              The domain is medical bills — federal protections that erase parts of what people are
+              billed. Fourteen of them, each with cited claims, hard clocks, and a generated letter.
+              <strong class="hl">The domain is the disposable part.</strong> The corpus shape, the
+              routing contracts, and the refusals are what transfer.
+            </p>
+          </div>
+          <div class="cards c2">
+            <div class="cell"><h3>What is real</h3>
+              <p class="small muted" style="margin:0">The rules, the citations, the routing, the letters, the refusals, the clocks.</p></div>
+            <div class="cell"><h3>What is not</h3>
+              <p class="small muted" style="margin:0">Users. One domain, one person, no traction. It is an existence proof, not a business.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10 -->
+    <section class="slide" id="s10" data-slide="10" data-name="architecture">
+      <div class="shell">
+        <p class="kicker">The five layers — identical in every domain</p>
+        <h2>Only the contents change.</h2>
+        <div class="flow" style="margin-bottom:18px">
+          <div><span class="n">01</span><h3 style="margin-top:6px">Rule contract</h3>
+            <p class="tiny muted" style="margin:0">What it covers, what defeats it, what the clock is, what bounces a first attempt.</p></div>
+          <div><span class="n">02</span><h3 style="margin-top:6px">Institution adapter</h3>
+            <p class="tiny muted" style="margin:0">Their form, channel and timing — in its own slot, because their process is not the law.</p></div>
+          <div><span class="n">03</span><h3 style="margin-top:6px">Evidence layer</h3>
+            <p class="tiny muted" style="margin:0">Cited, quoted, tiered, dated. Dead rules retained and labelled.</p></div>
+          <div><span class="n">04</span><h3 style="margin-top:6px">Packet and review</h3>
+            <p class="tiny muted" style="margin:0">Smallest complete artifact. Every human-issued blocker named. The human signs.</p></div>
+          <div><span class="n">05</span><h3 style="margin-top:6px">Outcome ledger</h3>
+            <p class="tiny muted" style="margin:0">Sent, bounced, decided — recorded against the exact rule version that produced it.</p></div>
+        </div>
+        <p class="lede">
+          Layer five is why this is a platform and not a services motion.
+          <strong class="hl">The first case is bespoke. The second inherits everything the first one
+          paid for.</strong> Headcount grows by category, not by customer.
+        </p>
+      </div>
+    </section>
+
+    <!-- 11 -->
+    <section class="slide" id="s11" data-slide="11" data-name="landing-zones">
+      <div class="shell">
+        <p class="kicker">Where this lands — in priority order</p>
+        <h2>Three places, and only the third is a new product.</h2>
+        <div class="cards c3">
+          <div class="cell">
+            <span class="tag good">platform</span>
+            <h3 style="margin-top:10px">1 · The trust substrate</h3>
+            <p class="small" style="margin:0 0 8px">
+              A tiered, effective-dated, citable rules layer with explicit abstention contracts, sitting
+              under the assistant rather than beside it.
+            </p>
+            <p class="tiny muted" style="margin:0">Serves every bet at once. Nothing customer-facing has to change to start.</p>
+          </div>
+          <div class="cell">
+            <span class="tag good">cheapest</span>
+            <h3 style="margin-top:10px">2 · The expert flywheel</h3>
+            <p class="small" style="margin:0 0 8px">
+              Every correction a live expert makes to an AI-prepared draft is a labeled training example.
+              The company already pays for the labor and mostly discards the label.
+            </p>
+            <p class="tiny muted" style="margin:0">Entirely internal. No new customer surface, no regulatory exposure.</p>
+          </div>
+          <div class="cell">
+            <span class="tag warn">provocative</span>
+            <h3 style="margin-top:10px">3 · Score → advocacy</h3>
+            <p class="small" style="margin:0 0 8px">
+              A consumer money surface with well over a hundred million members currently shows you a
+              number and sells you a product. It could instead go get your money back.
+            </p>
+            <p class="tiny muted" style="margin:0">
+              Medical collections is the wedge because it is already on the report being shown. Same
+              object, not an adjacency leap.
+            </p>
+          </div>
+        </div>
+        <p class="small muted" style="margin-top:16px">
+          Sequenced deliberately: the first two are capability work with no launch risk. The third is a
+          bet, and it should not be taken until the first two have made it cheap.
+        </p>
+      </div>
+    </section>
+
+    <!-- 12 -->
+    <section class="slide" id="s12" data-slide="12" data-name="not-proposing">
+      <div class="shell">
+        <p class="kicker">Discipline</p>
+        <h2>What I am not proposing.</h2>
+        <div class="two">
+          <div>
+            <ul class="rows">
+              <li><strong>Not a health product.</strong> This is a credit-report and money-recovery
+                motion that happens to touch medical bills. Nobody is entering healthcare.</li>
+              <li><strong>Not a membership business.</strong> The demo carries a membership frame
+                because it was built standalone. Inside a company with an existing consumer surface,
+                that frame is wrong and should be dropped.</li>
+              <li><strong>Not a services organization.</strong> If layer five does not exist, this is
+                consulting and it should be killed. Layer five is the whole argument.</li>
+              <li><strong>Not a new brand.</strong> Everything here is a capability under an existing
+                surface.</li>
+            </ul>
+          </div>
+          <div>
+            <p class="lede">
+              A strategy that cannot say what it excludes is not a strategy. Each of these was a real
+              temptation while building, and each is a way this becomes off-mission within two quarters.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 13 -->
+    <section class="slide" id="s13" data-slide="13" data-name="how-you-know">
+      <div class="shell">
+        <p class="kicker">How you would know it is working</p>
+        <h2>Measure the refusals, not the answers.</h2>
+        <div class="cards c2">
+          <div class="cell"><h3>Abstention rate, held deliberately above zero</h3>
+            <p class="small muted" style="margin:0">A system that never declines is not calibrated, it is just confident. Falling to zero is the alarm.</p></div>
+          <div class="cell"><h3>Expert edit distance, trending down</h3>
+            <p class="small muted" style="margin:0">How much a human changes before signing. The single cleanest quality signal, and it is free to collect.</p></div>
+          <div class="cell"><h3>First-attempt acceptance</h3>
+            <p class="small muted" style="margin:0">Did the artifact survive the institution's review without a deficiency round.</p></div>
+          <div class="cell"><h3>Cost of the second domain</h3>
+            <p class="small muted" style="margin:0">If domain two does not cost meaningfully less than domain one, layer five is not real and the platform claim is false.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 14 -->
+    <section class="slide" id="s14" data-slide="14" data-name="ask">
+      <div class="shell">
+        <p class="kicker">The ask</p>
+        <h2>One workflow, ninety days, through the experts you already have.</h2>
+        <div class="two">
+          <div>
+            <p class="lede">
+              Pick one rules-heavy workflow that is under-owned today. Build the five layers for it.
+              Route it through existing human experts so accountability never moves.
+            </p>
+            <p class="lede">
+              Deliver three things: the working layer, a reliability harness with an explicit
+              do-not-ship threshold, and a written spec for which pieces graduate to platform.
+            </p>
+            <p class="lede">
+              <strong class="hl">Then a second, unrelated workflow on the same spine.</strong> One
+              workflow is a feature. Two unrelated ones on shared infrastructure is a factory.
+            </p>
+          </div>
+          <div class="cards c2">
+            <div class="cell"><h3>What success looks like</h3>
+              <p class="small muted" style="margin:0">Domain two is visibly cheaper than domain one, and you can point at the parts that made it cheaper.</p></div>
+            <div class="cell"><h3>What failure looks like</h3>
+              <p class="small muted" style="margin:0">Domain two costs the same. Then this was bespoke work wearing a platform costume, and the honest move is to stop.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 15 -->
+    <section class="slide finale" id="s15" data-slide="15" data-name="demo">
+      <div class="shell">
+        <p class="kicker">See it refuse to answer</p>
+        <h2 style="max-width:24ch">Everything above is a claim. This is the running system.</h2>
+        <a
+          class="megalink"
+          id="cta"
+          href="https://untangle.polyfeeds.dev/#/check?utm_source=int-deck&utm_medium=slides&utm_campaign=ground-truth"
+          rel="noopener"
+        >
+          <span class="go">Open the live demo →</span>
+          <span class="url">untangle.polyfeeds.dev</span>
+          <span class="sub">
+            Load the sample bill. Watch it price four protections, flag a collection that started inside
+            a window the hospital was not supposed to act in, refuse on a struck-down rule, and tell you
+            which protections your coverage puts out of reach.
+          </span>
+        </a>
+        <p class="small muted" style="max-width:64ch">
+          Built solo. One domain, fourteen cited federal protections, nine generated letters, zero users.
+          An existence proof for the architecture and the discipline — which are the parts that take
+          longest to get right.
+        </p>
+        <p class="tiny muted" style="margin-top:20px">
+          Paul Jump · <a href="https://pauljump.github.io/case/">selected product cases</a> ·
+          not affiliated with, endorsed by, or a product of any company · nothing here is legal, tax, or
+          medical advice
+        </p>
+      </div>
+    </section>
+
+    <!-- ---------- Google Analytics (GA4) ---------- -->
+    <script>
+      // Set this to the GA4 measurement ID (looks like "G-XXXXXXXXXX") to turn
+      // Google Analytics on. Left empty, every gtag call below is a safe no-op,
+      // so the deck ships and Pulse still records everything.
+      window.__GA_ID = "";
+    </script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { window.dataLayer.push(arguments); }
+      (function () {
+        var id = window.__GA_ID;
+        if (!id) return;
+        var s = document.createElement("script");
+        s.async = true;
+        s.src = "https://www.googletagmanager.com/gtag/js?id=" + encodeURIComponent(id);
+        document.head.appendChild(s);
+        gtag("js", new Date());
+        gtag("config", id, { send_page_view: true });
+      })();
+    </script>
+
+    <!-- ---------- Pulse + deck mechanics ---------- -->
+    <script>
+      (function () {
+        var host = window.location.hostname;
+        var LOCAL = host === "localhost" || host === "127.0.0.1" || host === "";
+
+        var endpoint = "https://pulse.polyfeeds.dev/api/ingest";
+        var property = "pauljump-int";
+        var visitorKey = "pulse_visitor_id";
+        var landingKey = "pulse_landing_path";
+        var enteredAt = Date.now();
+        var activeMs = 0;
+        var activeSince = document.visibilityState === "visible" ? enteredAt : null;
+        var lastDwellMs = -1;
+        var maxSlide = 0;
+
+        function cleanPath(p) { return (p || "/").split("?")[0].split("#")[0] || "/"; }
+
+        function cleanReferrer(r) {
+          if (!r) return undefined;
+          try { var u = new URL(r); return u.origin + cleanPath(u.pathname); } catch (_) { return undefined; }
+        }
+
+        function visitorId() {
+          try {
+            var id = window.localStorage.getItem(visitorKey);
+            if (!id) {
+              id = window.crypto && window.crypto.randomUUID
+                ? window.crypto.randomUUID()
+                : Date.now() + "-" + Math.random().toString(36).slice(2);
+              window.localStorage.setItem(visitorKey, id);
+            }
+            return id;
+          } catch (_) { return undefined; }
+        }
+
+        function landingPath() {
+          var current = cleanPath(window.location.pathname);
+          try {
+            var saved = window.sessionStorage.getItem(landingKey);
+            if (saved) return saved;
+            window.sessionStorage.setItem(landingKey, current);
+          } catch (_) {}
+          return current;
+        }
+
+        function attribution() {
+          var p = new URLSearchParams(window.location.search);
+          return {
+            source: p.get("utm_source") || undefined,
+            medium: p.get("utm_medium") || undefined,
+            campaign: p.get("utm_campaign") || undefined,
+            term: p.get("utm_term") || undefined,
+            content: p.get("utm_content") || undefined,
+          };
+        }
+
+        function payload(event, extra) {
+          return JSON.stringify(Object.assign({
+            property: property,
+            event: event,
+            path: cleanPath(window.location.pathname),
+            referrer: cleanReferrer(document.referrer),
+            landingPath: landingPath(),
+            visitorId: visitorId(),
+            screen: window.innerWidth + "x" + window.innerHeight,
+            props: extra || {},
+          }, attribution()));
+        }
+
+        // One call site for both sinks, so nothing can be instrumented in one and
+        // silently missed in the other.
+        function track(event, extra, gaName) {
+          try {
+            gtag("event", gaName || event.replace(/[^a-zA-Z0-9_]/g, "_"), extra || {});
+          } catch (_) {}
+          if (LOCAL) return;
+          try {
+            var body = payload(event, extra);
+            if (navigator.sendBeacon) {
+              navigator.sendBeacon(endpoint, new Blob([body], { type: "text/plain" }));
+              return;
+            }
+            fetch(endpoint, {
+              method: "POST",
+              headers: { "Content-Type": "text/plain" },
+              keepalive: true,
+              body: body,
+            }).catch(function () {});
+          } catch (_) {}
+        }
+
+        var slides = Array.prototype.slice.call(document.querySelectorAll("section.slide"));
+        var total = slides.length;
+        document.getElementById("tot").textContent = String(total);
+
+        track("page_view", { totalSlides: total });
+
+        /* ---------- dwell (active time only) ---------- */
+        function activeTotal() { return activeMs + (activeSince ? Date.now() - activeSince : 0); }
+
+        function sendDwell(final) {
+          var t = activeTotal();
+          if (t <= lastDwellMs + (final ? 0 : 1000)) return;
+          lastDwellMs = t;
+          track("page_dwell", {
+            dwellMs: t,
+            elapsedMs: Date.now() - enteredAt,
+            maxSlide: maxSlide,
+            slidesTotal: total,
+            final: final || undefined,
+          });
+        }
+
+        document.addEventListener("visibilitychange", function () {
+          if (document.visibilityState === "hidden") {
+            if (activeSince) { activeMs += Date.now() - activeSince; activeSince = null; }
+            sendDwell(false);
+          } else if (!activeSince) {
+            activeSince = Date.now();
+          }
+        });
+
+        window.addEventListener("pagehide", function () {
+          if (activeSince) { activeMs += Date.now() - activeSince; activeSince = null; }
+          sendDwell(true);
+        });
+
+        /* ---------- per-slide reach + deck progress ---------- */
+        var seen = {};
+        var progressMarks = [25, 50, 75, 100];
+        var progressSent = {};
+
+        function reachedSlide(n, name) {
+          if (n > maxSlide) maxSlide = n;
+          if (!seen[n]) {
+            seen[n] = true;
+            track("slide_view:" + n, { slide: n, name: name, of: total }, "slide_view");
+          }
+          var pct = Math.round((maxSlide / total) * 100);
+          progressMarks.forEach(function (m) {
+            if (pct >= m && !progressSent[m]) {
+              progressSent[m] = true;
+              track("deck_progress:" + m, { pct: pct, maxSlide: maxSlide }, "deck_progress");
+            }
+          });
+          var fill = document.getElementById("railfill");
+          if (fill) fill.style.width = pct + "%";
+          document.getElementById("cur").textContent = String(n);
+        }
+
+        if ("IntersectionObserver" in window) {
+          var io = new IntersectionObserver(function (entries) {
+            entries.forEach(function (e) {
+              if (!e.isIntersecting) return;
+              reachedSlide(Number(e.target.getAttribute("data-slide")), e.target.getAttribute("data-name"));
+            });
+          }, { threshold: 0.5 });
+          slides.forEach(function (s) { io.observe(s); });
+        } else {
+          reachedSlide(1, "title");
+        }
+
+        /* ---------- outbound clicks ---------- */
+        document.addEventListener("click", function (ev) {
+          var a = ev.target && ev.target.closest && ev.target.closest("a[href]");
+          if (!a) return;
+          try {
+            var u = new URL(a.href, window.location.href);
+            if (u.protocol !== "http:" && u.protocol !== "https:") return;
+            if (u.origin === window.location.origin) return;
+            var isCta = a.id === "cta";
+            track(
+              (isCta ? "cta_click:" : "outbound:") + u.hostname,
+              {
+                target: u.origin + cleanPath(u.pathname),
+                targetPath: cleanPath(u.pathname),
+                linkLabel: (a.textContent || "").trim().slice(0, 120) || undefined,
+                fromSlide: maxSlide,
+                dwellMs: activeTotal(),
+              },
+              isCta ? "cta_click" : "outbound_click"
+            );
+          } catch (_) {}
+        });
+
+        /* ---------- navigation ---------- */
+        function currentIndex() {
+          var best = 0, bestTop = Infinity;
+          slides.forEach(function (s, i) {
+            var top = Math.abs(s.getBoundingClientRect().top);
+            if (top < bestTop) { bestTop = top; best = i; }
+          });
+          return best;
+        }
+
+        function go(delta, how) {
+          var i = Math.max(0, Math.min(slides.length - 1, currentIndex() + delta));
+          slides[i].scrollIntoView({ behavior: "smooth", block: "start" });
+          if (how) track("nav:" + how, { to: i + 1, direction: delta > 0 ? "next" : "prev" }, "deck_nav");
+        }
+
+        document.getElementById("next").addEventListener("click", function () { go(1, "button"); });
+        document.getElementById("prev").addEventListener("click", function () { go(-1, "button"); });
+
+        document.addEventListener("keydown", function (e) {
+          if (e.metaKey || e.ctrlKey || e.altKey) return;
+          if (e.key === "ArrowRight" || e.key === "PageDown" || e.key === " ") { e.preventDefault(); go(1, "key"); }
+          else if (e.key === "ArrowLeft" || e.key === "PageUp") { e.preventDefault(); go(-1, "key"); }
+          else if (e.key === "Home") { e.preventDefault(); slides[0].scrollIntoView({ behavior: "smooth" }); }
+          else if (e.key === "End") { e.preventDefault(); slides[slides.length - 1].scrollIntoView({ behavior: "smooth" }); }
+        });
+      })();
+    </script>
+  </body>
+</html>
