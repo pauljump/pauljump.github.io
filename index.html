@@ -90,14 +90,6 @@
         font-style: italic;
       }
 
-      .header-note {
-        color: var(--muted);
-        font-size: 12px;
-        font-weight: 650;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-      }
-
       .section-label {
         margin: 0 0 18px;
         color: #2a7048;
@@ -110,6 +102,31 @@
       .links-section {
         border-top: 1px solid var(--line);
         padding: 92px 0 88px;
+      }
+
+      .now-card {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(220px, 0.7fr);
+        gap: 40px;
+        align-items: end;
+        margin-bottom: 38px;
+        border-top: 1px solid var(--ink);
+        padding-top: 16px;
+      }
+
+      .now-card strong {
+        display: block;
+        font-family: var(--serif);
+        font-size: 28px;
+        font-weight: 500;
+        letter-spacing: -0.04em;
+      }
+
+      .now-card p {
+        margin: 0;
+        color: var(--muted);
+        font-size: 14px;
+        line-height: 1.58;
       }
 
       .section-heading {
@@ -285,8 +302,8 @@
       @media (max-width: 720px) {
         .shell { width: min(100% - 28px, 560px); }
         header { min-height: 70px; }
-        .header-note { font-size: 10px; letter-spacing: 0.05em; }
         .links-section { padding: 66px 0 72px; }
+        .now-card { grid-template-columns: 1fr; gap: 10px; margin-bottom: 30px; }
         .section-heading { grid-template-columns: 1fr; gap: 18px; }
         .section-intro { margin: 0; }
         .primary-links,
@@ -305,15 +322,20 @@
           <span class="mark-dot" aria-hidden="true">pj</span>
           paul jump
         </a>
-        <span class="header-note">new york / building in public</span>
       </header>
 
       <main id="top">
         <section class="links-section" aria-label="Primary links">
+          <aside class="now-card">
+            <strong>Currently: Kit</strong>
+            <p>
+              An AI agent for New York OPWDD self-direction. It finds the route, gets the missing details, and builds a packet a parent can review.
+            </p>
+          </aside>
           <div class="primary-links">
             <a class="primary-link" href="/resume/Paul-Jump-Resume.docx">
               <span class="link-number">01</span>
-              <div><h3>Resume</h3><p>General one-page version · growth products across B2B + B2C</p></div>
+              <div><h3>Resume</h3><p>Last decade in Uber product and engineering, with dozens of side projects</p></div>
               <span class="arrow" aria-hidden="true">↗</span>
             </a>
             <a class="primary-link" href="/portfolio/">
