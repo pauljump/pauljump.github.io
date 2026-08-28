@@ -98,15 +98,6 @@
         text-transform: uppercase;
       }
 
-      .hero {
-        display: grid;
-        grid-template-columns: minmax(0, 1.22fr) minmax(220px, 0.78fr);
-        gap: 70px;
-        align-items: end;
-        padding: 104px 0 92px;
-      }
-
-      .eyebrow,
       .section-label {
         margin: 0 0 18px;
         color: #2a7048;
@@ -116,49 +107,9 @@
         text-transform: uppercase;
       }
 
-      h1 {
-        max-width: 680px;
-        margin: 0;
-        font-family: var(--serif);
-        font-size: clamp(62px, 10.2vw, 112px);
-        font-weight: 500;
-        letter-spacing: -0.075em;
-        line-height: 0.84;
-      }
-
-      .hero-copy {
-        max-width: 560px;
-        margin: 30px 0 0;
-        color: #405048;
-        font-size: clamp(19px, 2.1vw, 25px);
-        letter-spacing: -0.025em;
-        line-height: 1.4;
-      }
-
-      .now-card {
-        border-top: 1px solid var(--ink);
-        padding-top: 16px;
-      }
-
-      .now-card strong {
-        display: block;
-        margin-bottom: 8px;
-        font-family: var(--serif);
-        font-size: 28px;
-        font-weight: 500;
-        letter-spacing: -0.04em;
-      }
-
-      .now-card p {
-        margin: 0;
-        color: var(--muted);
-        font-size: 14px;
-        line-height: 1.58;
-      }
-
       .links-section {
         border-top: 1px solid var(--line);
-        padding: 78px 0 88px;
+        padding: 92px 0 88px;
       }
 
       .section-heading {
@@ -335,9 +286,6 @@
         .shell { width: min(100% - 28px, 560px); }
         header { min-height: 70px; }
         .header-note { font-size: 10px; letter-spacing: 0.05em; }
-        .hero { grid-template-columns: 1fr; gap: 52px; padding: 78px 0 72px; }
-        h1 { font-size: clamp(60px, 19vw, 94px); }
-        .hero-copy { margin-top: 26px; font-size: 20px; }
         .links-section { padding: 66px 0 72px; }
         .section-heading { grid-template-columns: 1fr; gap: 18px; }
         .section-intro { margin: 0; }
@@ -361,31 +309,7 @@
       </header>
 
       <main id="top">
-        <section class="hero" aria-labelledby="hero-title">
-          <div>
-            <p class="eyebrow">links / 2026</p>
-            <h1 id="hero-title">Products.<br />Systems.<br />Signal.</h1>
-            <p class="hero-copy">
-              A short index of the things I’ve built across B2B, B2C, and AI: products with a user, a wedge, and a reason to exist.
-            </p>
-          </div>
-          <aside class="now-card">
-            <strong>Currently: Kit</strong>
-            <p>
-              An AI agent for New York OPWDD self-direction. It finds the route, gets the missing details, and builds a packet a parent can review.
-            </p>
-          </aside>
-        </section>
-
-        <section class="links-section" aria-labelledby="start-title">
-          <div class="section-heading">
-            <div>
-              <p class="section-label">01 / start here</p>
-              <h2 id="start-title">The useful<br />four.</h2>
-            </div>
-            <p class="section-intro">The shortest path to the work, the context behind it, and the current product.</p>
-          </div>
-
+        <section class="links-section" aria-label="Primary links">
           <div class="primary-links">
             <a class="primary-link" href="/resume/Paul-Jump-Resume.docx">
               <span class="link-number">01</span>
