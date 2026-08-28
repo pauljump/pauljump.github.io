@@ -3,16 +3,16 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#f4f0e8" />
-    <title>Paul Jump | Building Kit</title>
+    <meta name="theme-color" content="#eef1e9" />
+    <title>Paul Jump / links</title>
     <meta
       name="description"
-      content="Paul Jump is building Kit, an AI agent that handles family reimbursement work. Previously, he launched products globally and built forward-deployed teams at Uber."
+      content="A short index of Paul Jump's products, public AI work, and writing."
     />
-    <meta property="og:title" content="Paul Jump | Building Kit" />
+    <meta property="og:title" content="Paul Jump / links" />
     <meta
       property="og:description"
-      content="I did not think my way to Kit. I built my way to it."
+      content="Products, growth systems, and AI-native experiments."
     />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://pauljump.github.io/" />
@@ -20,1044 +20,447 @@
     <style>
       :root {
         color-scheme: light;
-        --paper: #f4f0e8;
-        --paper-deep: #e9e2d5;
-        --ink: #18221d;
-        --muted: #68716c;
-        --line: #d7d0c4;
-        --card: rgba(255, 253, 248, 0.72);
-        --kit: #b9f3d0;
-        --kit-dark: #155c38;
-        --orange: #ff6b35;
+        --paper: #eef1e9;
+        --paper-warm: #f7f5ed;
+        --ink: #14231b;
+        --muted: #65716a;
+        --line: #cbd3c8;
+        --deep: #1b3025;
+        --mint: #baf0cd;
+        --orange: #e9653e;
         --serif: Iowan Old Style, Baskerville, "Times New Roman", serif;
         --sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
           "Segoe UI", sans-serif;
       }
 
-      * {
-        box-sizing: border-box;
-      }
+      * { box-sizing: border-box; }
 
-      html {
-        scroll-behavior: smooth;
-      }
+      html { scroll-behavior: smooth; }
 
       body {
         margin: 0;
         background:
-          radial-gradient(circle at 12% 4%, rgba(185, 243, 208, 0.48), transparent 25rem),
+          radial-gradient(circle at 88% 0%, rgba(186, 240, 205, 0.62), transparent 28rem),
+          linear-gradient(135deg, rgba(255, 255, 255, 0.32), transparent 38%),
           var(--paper);
         color: var(--ink);
         font-family: var(--sans);
         -webkit-font-smoothing: antialiased;
       }
 
-      a {
-        color: inherit;
-      }
+      a { color: inherit; }
 
-      a:focus-visible,
-      summary:focus-visible {
+      a:focus-visible {
         outline: 3px solid var(--orange);
         outline-offset: 4px;
         border-radius: 3px;
       }
 
-      .shell {
-        width: min(1120px, calc(100% - 40px));
-        margin: 0 auto;
-      }
+      .shell { width: min(980px, calc(100% - 40px)); margin: 0 auto; }
 
       header {
         display: flex;
+        min-height: 84px;
         align-items: center;
         justify-content: space-between;
-        min-height: 82px;
         border-bottom: 1px solid var(--line);
       }
 
-      .name {
-        font-size: 14px;
-        font-weight: 760;
-        letter-spacing: -0.01em;
-        text-decoration: none;
-      }
-
-      nav {
-        display: flex;
+      .mark {
+        display: inline-flex;
         align-items: center;
-        gap: 22px;
-        color: var(--muted);
+        gap: 10px;
+        color: var(--ink);
         font-size: 13px;
-        font-weight: 650;
-      }
-
-      nav a {
+        font-weight: 800;
+        letter-spacing: 0.02em;
         text-decoration: none;
       }
 
-      nav a:hover {
-        color: var(--ink);
+      .mark-dot {
+        display: grid;
+        width: 28px;
+        height: 28px;
+        place-items: center;
+        border-radius: 50%;
+        background: var(--deep);
+        color: var(--mint);
+        font-family: var(--serif);
+        font-size: 14px;
+        font-style: italic;
+      }
+
+      .header-note {
+        color: var(--muted);
+        font-size: 12px;
+        font-weight: 650;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
       }
 
       .hero {
         display: grid;
-        grid-template-columns: minmax(0, 1fr) 260px;
-        gap: 60px;
+        grid-template-columns: minmax(0, 1.22fr) minmax(220px, 0.78fr);
+        gap: 70px;
         align-items: end;
-        padding: 112px 0 100px;
+        padding: 104px 0 92px;
       }
 
       .eyebrow,
       .section-label {
-        margin: 0 0 22px;
-        color: var(--kit-dark);
-        font-size: 12px;
-        font-weight: 780;
-        letter-spacing: 0.13em;
+        margin: 0 0 18px;
+        color: #2a7048;
+        font-size: 11px;
+        font-weight: 820;
+        letter-spacing: 0.16em;
         text-transform: uppercase;
       }
 
       h1 {
-        max-width: 810px;
+        max-width: 680px;
         margin: 0;
         font-family: var(--serif);
-        font-size: clamp(62px, 9.3vw, 126px);
+        font-size: clamp(62px, 10.2vw, 112px);
         font-weight: 500;
-        letter-spacing: -0.072em;
+        letter-spacing: -0.075em;
         line-height: 0.84;
       }
 
       .hero-copy {
-        max-width: 725px;
-        margin: 38px 0 0;
-        color: #3e4943;
-        font-size: clamp(20px, 2.1vw, 27px);
+        max-width: 560px;
+        margin: 30px 0 0;
+        color: #405048;
+        font-size: clamp(19px, 2.1vw, 25px);
         letter-spacing: -0.025em;
-        line-height: 1.38;
+        line-height: 1.4;
       }
 
-      .hero-note {
+      .now-card {
         border-top: 1px solid var(--ink);
         padding-top: 16px;
       }
 
-      .hero-note p {
+      .now-card strong {
+        display: block;
+        margin-bottom: 8px;
+        font-family: var(--serif);
+        font-size: 28px;
+        font-weight: 500;
+        letter-spacing: -0.04em;
+      }
+
+      .now-card p {
         margin: 0;
         color: var(--muted);
-        font-size: 13px;
-        line-height: 1.55;
-      }
-
-      .hero-note strong {
-        display: block;
-        margin-bottom: 6px;
-        color: var(--ink);
         font-size: 14px;
+        line-height: 1.58;
       }
 
-      .actions {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 11px;
-        margin-top: 34px;
-      }
-
-      .button {
-        display: inline-flex;
-        min-height: 46px;
-        align-items: center;
-        justify-content: center;
-        padding: 0 18px;
-        border: 1px solid var(--ink);
-        border-radius: 999px;
-        background: var(--ink);
-        color: #fff;
-        font-size: 13px;
-        font-weight: 720;
-        text-decoration: none;
-        transition: transform 160ms ease, background 160ms ease;
-      }
-
-      .button:hover {
-        transform: translateY(-2px);
-        background: #2b3931;
-      }
-
-      .button.secondary {
-        background: transparent;
-        color: var(--ink);
-      }
-
-      .button.secondary:hover {
-        background: rgba(255, 255, 255, 0.55);
-      }
-
-      .thread-section {
+      .links-section {
         border-top: 1px solid var(--line);
-        padding: 94px 0 110px;
+        padding: 78px 0 88px;
       }
 
-      .thread-layout {
+      .section-heading {
         display: grid;
-        grid-template-columns: 260px minmax(0, 700px);
-        gap: 60px;
-        justify-content: space-between;
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+        align-items: end;
+        margin-bottom: 28px;
       }
 
       h2 {
         margin: 0;
         font-family: var(--serif);
-        font-size: clamp(38px, 5vw, 62px);
+        font-size: clamp(38px, 5vw, 58px);
         font-weight: 500;
-        letter-spacing: -0.045em;
-        line-height: 0.98;
+        letter-spacing: -0.05em;
+        line-height: 0.95;
       }
 
       .section-intro {
-        margin: 24px 0 0;
+        max-width: 320px;
+        margin: 0 0 4px auto;
         color: var(--muted);
-        font-size: 14px;
+        font-size: 13px;
         line-height: 1.6;
       }
 
-      .thread {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-      }
-
-      .post {
-        position: relative;
-        display: grid;
-        grid-template-columns: 46px minmax(0, 1fr);
-        gap: 17px;
-        padding-bottom: 42px;
-      }
-
-      .post:last-child {
-        padding-bottom: 0;
-      }
-
-      .post::before {
-        position: absolute;
-        top: 46px;
-        bottom: 0;
-        left: 22px;
-        width: 1px;
-        background: var(--line);
-        content: "";
-      }
-
-      .post:last-child::before {
-        display: none;
-      }
-
-      .avatar {
-        position: relative;
-        z-index: 1;
-        display: grid;
-        width: 46px;
-        height: 46px;
-        place-items: center;
-        border: 1px solid #8e978f;
-        border-radius: 50%;
-        background: var(--paper);
-        font-family: var(--serif);
-        font-size: 16px;
-        font-style: italic;
-      }
-
-      .post-head {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 6px;
-        align-items: baseline;
-        min-height: 30px;
-        padding-top: 2px;
-        font-size: 13px;
-      }
-
-      .post-head strong {
-        font-size: 14px;
-      }
-
-      .handle,
-      .post-number {
-        color: var(--muted);
-      }
-
-      .post-number {
-        margin-left: auto;
-        font-variant-numeric: tabular-nums;
-      }
-
-      .post-body {
-        margin-top: 8px;
-        font-size: clamp(18px, 2vw, 23px);
-        letter-spacing: -0.021em;
-        line-height: 1.5;
-      }
-
-      .post-body p {
-        margin: 0 0 18px;
-      }
-
-      .post-body p:last-child {
-        margin-bottom: 0;
-      }
-
-      .post-body .quiet {
-        color: var(--muted);
-        font-size: 15px;
-        letter-spacing: -0.005em;
-      }
-
-      .kit-card {
-        margin-top: 21px;
-        padding: 25px;
-        border: 1px solid rgba(21, 92, 56, 0.25);
-        border-radius: 18px;
-        background: var(--kit);
-      }
-
-      .kit-card .mini-label {
-        display: block;
-        margin-bottom: 13px;
-        color: var(--kit-dark);
-        font-size: 11px;
-        font-weight: 800;
-        letter-spacing: 0.12em;
-        text-transform: uppercase;
-      }
-
-      .kit-card strong {
-        display: block;
-        font-family: var(--serif);
-        font-size: 29px;
-        font-weight: 500;
-        letter-spacing: -0.04em;
-        line-height: 1.05;
-      }
-
-      .kit-card p {
-        margin: 13px 0 0;
-        color: #28533c;
-        font-size: 14px;
-        letter-spacing: 0;
-        line-height: 1.55;
-      }
-
-      .proof {
-        border-top: 1px solid var(--line);
-        padding: 100px 0;
-      }
-
-      .proof-grid {
-        display: grid;
-        grid-template-columns: 1fr 1.52fr;
-        gap: 90px;
-      }
-
-      .beliefs {
-        display: grid;
-        gap: 1px;
-        margin-top: 42px;
-        border: 1px solid var(--line);
-        background: var(--line);
-      }
-
-      .belief {
-        padding: 22px;
-        background: var(--paper);
-      }
-
-      .belief span {
-        display: block;
-        margin-bottom: 9px;
-        color: var(--orange);
-        font-family: var(--serif);
-        font-size: 21px;
-        font-style: italic;
-      }
-
-      .belief p {
-        margin: 0;
-        color: #3e4943;
-        font-size: 15px;
-        line-height: 1.5;
-      }
-
-      .build-list {
-        border-top: 1px solid var(--ink);
-      }
-
-      .build {
-        display: grid;
-        grid-template-columns: 132px minmax(0, 1fr);
-        gap: 25px;
-        padding: 21px 0;
-        border-bottom: 1px solid var(--line);
-      }
-
-      .build strong {
-        font-size: 14px;
-        letter-spacing: -0.01em;
-      }
-
-      .build strong a {
-        text-decoration-color: #9fa79f;
-        text-decoration-thickness: 1px;
-        text-underline-offset: 4px;
-      }
-
-      .build strong a:hover {
-        text-decoration-color: var(--orange);
-      }
-
-      .build p {
-        margin: 0;
-        color: var(--muted);
-        font-size: 14px;
-        line-height: 1.55;
-      }
-
-      details {
-        margin-top: 24px;
-      }
-
-      summary {
-        width: fit-content;
-        cursor: pointer;
-        font-size: 13px;
-        font-weight: 740;
-        text-decoration: underline;
-        text-decoration-thickness: 1px;
-        text-underline-offset: 5px;
-      }
-
-      .more-builds {
-        margin-top: 22px;
-      }
-
-      .compounds {
-        padding: 100px 0;
-        background: var(--ink);
-        color: #f5f1e9;
-      }
-
-      .compound-grid {
-        display: grid;
-        grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
-        gap: 90px;
-        align-items: start;
-      }
-
-      .compounds .section-label {
-        color: #84d9a7;
-      }
-
-      .compounds p {
-        max-width: 450px;
-        margin: 27px 0 0;
-        color: #b9c2bc;
-        font-size: 17px;
-        line-height: 1.62;
-      }
-
-      .loop {
+      .primary-links {
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 10px;
-        counter-reset: loop;
       }
 
-      .loop-item {
-        min-height: 150px;
-        padding: 22px;
-        border: 1px solid #455149;
-        border-radius: 14px;
-        background: #202c25;
-        counter-increment: loop;
+      .primary-link {
+        display: grid;
+        grid-template-columns: 40px minmax(0, 1fr) 26px;
+        min-height: 120px;
+        gap: 17px;
+        align-items: center;
+        padding: 21px 22px;
+        border: 1px solid var(--line);
+        background: rgba(247, 245, 237, 0.72);
+        text-decoration: none;
+        transition: transform 160ms ease, border-color 160ms ease, background 160ms ease;
       }
 
-      .loop-item::before {
-        display: block;
-        margin-bottom: 27px;
-        color: #84d9a7;
-        content: "0" counter(loop);
-        font-size: 11px;
-        font-weight: 780;
-        letter-spacing: 0.12em;
+      .primary-link:hover {
+        transform: translateY(-3px);
+        border-color: #809487;
+        background: var(--paper-warm);
       }
 
-      .loop-item strong {
-        display: block;
-        margin-bottom: 7px;
+      .link-number {
+        color: var(--orange);
         font-family: var(--serif);
-        font-size: 24px;
-        font-weight: 500;
-        letter-spacing: -0.03em;
+        font-size: 19px;
+        font-style: italic;
       }
 
-      .loop-item span {
-        color: #aeb8b1;
+      .primary-link h3,
+      .repo h3 {
+        margin: 0;
+        font-size: 16px;
+        font-weight: 760;
+        letter-spacing: -0.02em;
+      }
+
+      .primary-link p,
+      .repo p {
+        margin: 6px 0 0;
+        color: var(--muted);
         font-size: 13px;
-        line-height: 1.5;
+        line-height: 1.48;
       }
 
-      .history {
-        padding: 100px 0;
+      .arrow {
+        color: var(--muted);
+        font-size: 19px;
+        text-align: right;
+        transition: transform 160ms ease;
+      }
+
+      .primary-link:hover .arrow,
+      .repo:hover .arrow { transform: translate(3px, -3px); color: var(--orange); }
+
+      .repos-section {
+        padding: 82px 0 96px;
+        background: var(--deep);
+        color: #f2f3eb;
+      }
+
+      .repos-section .section-label { color: #8fe0ad; }
+      .repos-section .section-intro { color: #abbab0; }
+
+      .repo-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1px;
+        margin-top: 30px;
+        border: 1px solid #466052;
+        background: #466052;
+      }
+
+      .repo {
+        position: relative;
+        display: grid;
+        grid-template-columns: 25px minmax(0, 1fr) 22px;
+        gap: 13px;
+        min-height: 145px;
+        padding: 21px 20px;
+        background: var(--deep);
+        text-decoration: none;
+        transition: background 160ms ease;
+      }
+
+      .repo:hover { background: #244133; }
+      .repo .link-number { color: #8fe0ad; font-size: 14px; }
+      .repo p { color: #abbab0; }
+      .repo .arrow { color: #8aa394; }
+
+      .signal {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 1fr;
+        gap: 60px;
+        align-items: start;
+        padding: 84px 0;
         border-bottom: 1px solid var(--line);
       }
 
-      .history-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 80px;
-      }
-
-      .history-copy {
-        color: #3e4943;
-        font-size: 18px;
-        line-height: 1.65;
-      }
-
-      .history-copy p {
-        margin: 0 0 20px;
-      }
-
-      .history-copy p:last-child {
-        margin-bottom: 0;
-      }
-
-      .numbers {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        align-content: start;
-        gap: 1px;
-        border: 1px solid var(--line);
-        background: var(--line);
-      }
-
-      .number {
-        min-height: 150px;
-        padding: 22px;
-        background: var(--paper);
-      }
-
-      .number strong {
-        display: block;
+      .signal-copy {
+        max-width: 440px;
+        margin: 0;
+        color: #405048;
         font-family: var(--serif);
-        font-size: 48px;
-        font-weight: 500;
-        letter-spacing: -0.055em;
+        font-size: clamp(25px, 3.4vw, 40px);
+        letter-spacing: -0.045em;
+        line-height: 1.08;
       }
 
-      .number span {
-        display: block;
-        max-width: 165px;
-        margin-top: 10px;
-        color: var(--muted);
-        font-size: 12px;
-        line-height: 1.45;
+      .elsewhere {
+        display: grid;
+        gap: 0;
+        border-top: 1px solid var(--ink);
       }
+
+      .elsewhere a {
+        display: flex;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: 20px;
+        padding: 15px 0;
+        border-bottom: 1px solid var(--line);
+        font-size: 14px;
+        font-weight: 720;
+        text-decoration: none;
+      }
+
+      .elsewhere a span { color: var(--muted); font-size: 12px; font-weight: 500; }
+      .elsewhere a:hover { color: var(--orange); }
 
       footer {
         display: flex;
-        min-height: 126px;
+        min-height: 112px;
         align-items: center;
         justify-content: space-between;
-        gap: 30px;
+        gap: 24px;
         color: var(--muted);
-        font-size: 13px;
+        font-size: 12px;
       }
 
-      .footer-links {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 20px;
-      }
+      footer a { font-weight: 750; text-underline-offset: 4px; }
 
-      .footer-links a {
-        font-weight: 680;
-        text-underline-offset: 4px;
-      }
-
-      @media (max-width: 800px) {
-        .shell {
-          width: min(100% - 28px, 680px);
-        }
-
-        header {
-          min-height: 68px;
-        }
-
-        nav {
-          gap: 14px;
-        }
-
-        nav a:first-child {
-          display: none;
-        }
-
-        .hero {
-          grid-template-columns: 1fr;
-          gap: 54px;
-          padding: 78px 0 72px;
-        }
-
-        h1 {
-          font-size: clamp(58px, 18vw, 92px);
-        }
-
-        .hero-copy {
-          margin-top: 28px;
-          font-size: 20px;
-        }
-
-        .hero-note {
-          width: min(100%, 300px);
-        }
-
-        .thread-section,
-        .proof,
-        .compounds,
-        .history {
-          padding: 76px 0;
-        }
-
-        .thread-layout,
-        .proof-grid,
-        .compound-grid,
-        .history-grid {
-          grid-template-columns: 1fr;
-          gap: 52px;
-        }
-
-        .section-intro {
-          max-width: 440px;
-        }
-
-        .post {
-          grid-template-columns: 40px minmax(0, 1fr);
-          gap: 13px;
-          padding-bottom: 35px;
-        }
-
-        .post::before {
-          top: 40px;
-          left: 19px;
-        }
-
-        .avatar {
-          width: 40px;
-          height: 40px;
-        }
-
-        .post-body {
-          font-size: 18px;
-          line-height: 1.48;
-        }
-
-        .post-number {
-          display: none;
-        }
-
-        .build {
-          grid-template-columns: 105px minmax(0, 1fr);
-          gap: 17px;
-        }
-      }
-
-      @media (max-width: 500px) {
-        .actions {
-          display: grid;
-        }
-
-        .button {
-          width: 100%;
-        }
-
-        .loop,
-        .numbers {
-          grid-template-columns: 1fr;
-        }
-
-        .loop-item,
-        .number {
-          min-height: auto;
-        }
-
-        footer {
-          align-items: flex-start;
-          flex-direction: column;
-          justify-content: center;
-          padding: 34px 0;
-        }
-      }
-
-      @media (prefers-reduced-motion: reduce) {
-        html {
-          scroll-behavior: auto;
-        }
-
-        .button {
-          transition: none;
-        }
+      @media (max-width: 720px) {
+        .shell { width: min(100% - 28px, 560px); }
+        header { min-height: 70px; }
+        .header-note { font-size: 10px; letter-spacing: 0.05em; }
+        .hero { grid-template-columns: 1fr; gap: 52px; padding: 78px 0 72px; }
+        h1 { font-size: clamp(60px, 19vw, 94px); }
+        .hero-copy { margin-top: 26px; font-size: 20px; }
+        .links-section { padding: 66px 0 72px; }
+        .section-heading { grid-template-columns: 1fr; gap: 18px; }
+        .section-intro { margin: 0; }
+        .primary-links,
+        .repo-grid { grid-template-columns: 1fr; }
+        .repos-section { padding: 68px 0 76px; }
+        .repo { min-height: 126px; }
+        .signal { grid-template-columns: 1fr; gap: 44px; padding: 70px 0; }
+        footer { align-items: flex-start; flex-direction: column; justify-content: center; }
       }
     </style>
   </head>
   <body>
     <div class="shell">
       <header>
-        <a class="name" href="#top">Paul Jump</a>
-        <nav aria-label="Primary navigation">
-          <a href="#journey">Journey</a>
-          <a href="https://kitty.polyfeeds.dev/askkit">Kit</a>
-          <a href="https://x.com/paulljump">X</a>
-          <a href="https://github.com/pauljump">GitHub</a>
-        </nav>
+        <a class="mark" href="#top" aria-label="Paul Jump, back to top">
+          <span class="mark-dot" aria-hidden="true">pj</span>
+          paul jump
+        </a>
+        <span class="header-note">new york / building in public</span>
       </header>
 
       <main id="top">
         <section class="hero" aria-labelledby="hero-title">
           <div>
-            <p class="eyebrow">Founder of Kit · New York City</p>
-            <h1 id="hero-title">I built my way to Kit.</h1>
+            <p class="eyebrow">links / 2026</p>
+            <h1 id="hero-title">Products.<br />Systems.<br />Signal.</h1>
             <p class="hero-copy">
-              I spent 12 years at Uber learning how to launch products everywhere
-              and turn one-off customer work into systems. Then I left, cast a
-              wide net, and built until the same problem kept finding me.
+              A short index of the things I’ve built across B2B, B2C, and AI: products with a user, a wedge, and a reason to exist.
             </p>
-            <div class="actions">
-              <a class="button" href="https://kitty.polyfeeds.dev/askkit">Try Kit</a>
-              <a class="button secondary" href="https://kitty.polyfeeds.dev/askkit/demo">See the packet demo</a>
-            </div>
           </div>
-          <aside class="hero-note" aria-label="Current focus">
-            <strong>Right now</strong>
+          <aside class="now-card">
+            <strong>Currently: Kit</strong>
             <p>
-              Building an agent that handles reimbursement work for families,
-              starting with New York OPWDD Self-Direction.
+              An AI agent for New York OPWDD self-direction. It finds the route, gets the missing details, and builds a packet a parent can review.
             </p>
           </aside>
         </section>
 
-        <section class="thread-section" id="journey" aria-labelledby="journey-title">
-          <div class="thread-layout">
+        <section class="links-section" aria-labelledby="start-title">
+          <div class="section-heading">
             <div>
-              <p class="section-label">The thread I almost posted</p>
-              <h2 id="journey-title">How I got here.</h2>
-              <p class="section-intro">
-                The short version of a long year spent following whatever I
-                could not stop thinking about.
-              </p>
+              <p class="section-label">01 / start here</p>
+              <h2 id="start-title">The useful<br />four.</h2>
             </div>
+            <p class="section-intro">The shortest path to the work, the context behind it, and the current product.</p>
+          </div>
 
-            <ol class="thread" aria-label="Paul's journey to Kit">
-              <li class="post">
-                <div class="avatar" aria-hidden="true">pj</div>
-                <article>
-                  <div class="post-head">
-                    <strong>Paul Jump</strong>
-                    <span class="handle">@paulljump</span>
-                    <span class="post-number">1 / 6</span>
-                  </div>
-                  <div class="post-body">
-                    <p>
-                      When anyone can build anything, the only question left is
-                      what is worth it for you to build at all.
-                    </p>
-                    <p>
-                      So after Uber I stopped trying to answer that question in
-                      my head. I started building.
-                    </p>
-                  </div>
-                </article>
-              </li>
-
-              <li class="post">
-                <div class="avatar" aria-hidden="true">pj</div>
-                <article>
-                  <div class="post-head">
-                    <strong>Paul Jump</strong>
-                    <span class="handle">@paulljump</span>
-                    <span class="post-number">2 / 6</span>
-                  </div>
-                  <div class="post-body">
-                    <p>
-                      I built an AI debate arena, a voice operating system for
-                      coding agents, a map of problems NYC kept closing, housing
-                      intelligence, an AI music service, and a factory that turns
-                      my six-year-old's voice notes into iPad games.
-                    </p>
-                    <p class="quiet">
-                      Some got attention. Some found users. I put all of them down.
-                    </p>
-                  </div>
-                </article>
-              </li>
-
-              <li class="post">
-                <div class="avatar" aria-hidden="true">pj</div>
-                <article>
-                  <div class="post-head">
-                    <strong>Paul Jump</strong>
-                    <span class="handle">@paulljump</span>
-                    <span class="post-number">3 / 6</span>
-                  </div>
-                  <div class="post-body">
-                    <p>
-                      The builds kept teaching me the same thing. People do not
-                      want a horizontal agent. They want to type the headache and
-                      have someone own it.
-                    </p>
-                    <p>
-                      Information is not representation. A useful consumer agent
-                      has to carry the work to an outcome.
-                    </p>
-                  </div>
-                </article>
-              </li>
-
-              <li class="post">
-                <div class="avatar" aria-hidden="true">pj</div>
-                <article>
-                  <div class="post-head">
-                    <strong>Paul Jump</strong>
-                    <span class="handle">@paulljump</span>
-                    <span class="post-number">4 / 6</span>
-                  </div>
-                  <div class="post-body">
-                    <p>
-                      Then another dad told me a swimming reimbursement had been
-                      stuck for weeks. He was ready to give up and find a less
-                      convenient pool.
-                    </p>
-                    <p>
-                      I pulled out my phone, researched the Medicaid rule, his
-                      fiscal intermediary, and the pool, then built the missing
-                      provider material. The family reported that it was accepted
-                      on the first submission within 48 hours.
-                    </p>
-                  </div>
-                </article>
-              </li>
-
-              <li class="post">
-                <div class="avatar" aria-hidden="true">pj</div>
-                <article>
-                  <div class="post-head">
-                    <strong>Paul Jump</strong>
-                    <span class="handle">@paulljump</span>
-                    <span class="post-number">5 / 6</span>
-                  </div>
-                  <div class="post-body">
-                    <p>
-                      I reused the pattern for martial arts and piano. Three
-                      families now report first-submission approvals. Other
-                      parents started handing me their headaches before there was
-                      a public product.
-                    </p>
-                    <p>
-                      This felt different. The problem was mine. The pull was real.
-                      The outcome was objective. Every case made the next one easier.
-                    </p>
-                  </div>
-                </article>
-              </li>
-
-              <li class="post">
-                <div class="avatar" aria-hidden="true">pj</div>
-                <article>
-                  <div class="post-head">
-                    <strong>Paul Jump</strong>
-                    <span class="handle">@paulljump</span>
-                    <span class="post-number">6 / 6</span>
-                  </div>
-                  <div class="post-body">
-                    <p>That is Kit.</p>
-                    <div class="kit-card">
-                      <span class="mini-label">Now building</span>
-                      <strong>One text box for the headache.</strong>
-                      <p>
-                        Kit finds the route, gathers the evidence, builds the
-                        packet, and learns from the outcome. OPWDD reimbursement
-                        is the launchpad. Insurance is next.
-                      </p>
-                    </div>
-                  </div>
-                </article>
-              </li>
-            </ol>
+          <div class="primary-links">
+            <a class="primary-link" href="/resume/Paul-Jump-Resume.docx">
+              <span class="link-number">01</span>
+              <div><h3>Resume</h3><p>General one-page version · growth products across B2B + B2C</p></div>
+              <span class="arrow" aria-hidden="true">↗</span>
+            </a>
+            <a class="primary-link" href="/portfolio/">
+              <span class="link-number">02</span>
+              <div><h3>Portfolio</h3><p>Live work, demos, and the wider build archive</p></div>
+              <span class="arrow" aria-hidden="true">↗</span>
+            </a>
+            <a class="primary-link" href="/case/">
+              <span class="link-number">03</span>
+              <div><h3>Applied AI case study</h3><p>Verification, retrieval, provenance, and reviewable systems</p></div>
+              <span class="arrow" aria-hidden="true">↗</span>
+            </a>
+            <a class="primary-link" href="https://opwddkit.com" target="_blank" rel="noopener noreferrer">
+              <span class="link-number">04</span>
+              <div><h3>OPWDD Kit</h3><p>Turn a family request into a sourced packet</p></div>
+              <span class="arrow" aria-hidden="true">↗</span>
+            </a>
           </div>
         </section>
 
-        <section class="proof" aria-labelledby="proof-title">
-          <div class="proof-grid">
-            <div>
-              <p class="section-label">What the wide net taught me</p>
-              <h2 id="proof-title">The pattern was the product.</h2>
-              <div class="beliefs">
-                <div class="belief">
-                  <span>01</span>
-                  <p>Own the headache, not the chat.</p>
-                </div>
-                <div class="belief">
-                  <span>02</span>
-                  <p>Give the consumer an agent, not another dashboard.</p>
-                </div>
-                <div class="belief">
-                  <span>03</span>
-                  <p>Turn every solved case into a reusable part.</p>
-                </div>
+        <section class="repos-section" aria-labelledby="repos-title">
+          <div class="shell">
+            <div class="section-heading">
+              <div>
+                <p class="section-label">02 / public repos</p>
+                <h2 id="repos-title">A few things<br />worth opening.</h2>
               </div>
+              <p class="section-intro">Current experiments in agent memory, evaluations, small models, and products that meet the real world.</p>
             </div>
 
-            <div>
-              <div class="build-list" aria-label="Selected projects">
-                <div class="build">
-                  <strong><a href="https://colosseum.polyfeeds.dev">Colosseum</a></strong>
-                  <p>I got better answers when models argued, so I built the arena and a separate judge.</p>
-                </div>
-                <div class="build">
-                  <strong><a href="https://walkie.cc">Walkie</a></strong>
-                  <p>I wanted to run coding agents while walking, so I built a voice conductor with approvals and receipts.</p>
-                </div>
-                <div class="build">
-                  <strong><a href="https://unignorable.polyfeeds.dev">Unignorable</a></strong>
-                  <p>NYC kept closing recurring problems, so I turned 455,000 reports into 12,000 persistent issues.</p>
-                </div>
-                <div class="build">
-                  <strong><a href="https://tryslopify.com">Slopify</a></strong>
-                  <p>A joke about AI music became a streaming service, local song factory, and on-device iPhone creator.</p>
-                </div>
-                <div class="build">
-                  <strong>RexAir</strong>
-                  <p>My son's obsession with flights became a real airline operations center built for his exact mind.</p>
-                </div>
-                <div class="build">
-                  <strong>Walt's Workshop</strong>
-                  <p>My six-year-old asks for a game. A voice-to-production loop puts it on his iPad. Thirteen have shipped.</p>
-                </div>
-              </div>
-
-              <details>
-                <summary>More things I built along the way</summary>
-                <div class="build-list more-builds">
-                  <div class="build">
-                    <strong>Pricefixed</strong>
-                    <p>Millions of apartment records joined into an open housing intelligence layer.</p>
-                  </div>
-                  <div class="build">
-                    <strong>Unhinged</strong>
-                    <p>An intentionally ridiculous date report built from 16 private, on-device signals.</p>
-                  </div>
-                  <div class="build">
-                    <strong>BestDai</strong>
-                    <p>A GPS for family days that chooses the plan instead of giving you another list.</p>
-                  </div>
-                  <div class="build">
-                    <strong>Teek</strong>
-                    <p>Source-backed models of how people actually make decisions under pressure.</p>
-                  </div>
-                  <div class="build">
-                    <strong>Vibecheck</strong>
-                    <p>A local-first builder profile made from a person's own coding-agent history.</p>
-                  </div>
-                </div>
-              </details>
+            <div class="repo-grid">
+              <a class="repo" href="https://github.com/pauljump/ai-factory" target="_blank" rel="noopener noreferrer">
+                <span class="link-number">01</span><div><h3>ai-factory</h3><p>Persistent memory for AI coding agents. FTS5 SQLite + automatic session injection.</p></div><span class="arrow" aria-hidden="true">↗</span>
+              </a>
+              <a class="repo" href="https://github.com/pauljump/teek" target="_blank" rel="noopener noreferrer">
+                <span class="link-number">02</span><div><h3>teek</h3><p>Falsifiable cognitive profiles built from cited public sources and held-out decisions.</p></div><span class="arrow" aria-hidden="true">↗</span>
+              </a>
+              <a class="repo" href="https://github.com/pauljump/itchy" target="_blank" rel="noopener noreferrer">
+                <span class="link-number">03</span><div><h3>itchy</h3><p>A byte-level 16MB language model. Small enough to understand, fast enough to play with.</p></div><span class="arrow" aria-hidden="true">↗</span>
+              </a>
+              <a class="repo" href="https://github.com/pauljump/legal-ai-verification-pilot" target="_blank" rel="noopener noreferrer">
+                <span class="link-number">04</span><div><h3>legal-ai-verification-pilot</h3><p>Reproducible retrieval, verification, and claim-bounded evaluation for legal AI.</p></div><span class="arrow" aria-hidden="true">↗</span>
+              </a>
+              <a class="repo" href="https://github.com/pauljump/kits" target="_blank" rel="noopener noreferrer">
+                <span class="link-number">05</span><div><h3>kits</h3><p>Composable backend packages for search, analytics, queues, payments, notifications, and LLMs.</p></div><span class="arrow" aria-hidden="true">↗</span>
+              </a>
+              <a class="repo" href="https://github.com/pauljump/pricefixed" target="_blank" rel="noopener noreferrer">
+                <span class="link-number">06</span><div><h3>pricefixed</h3><p>Open tools and public records for the real price and history of NYC apartments.</p></div><span class="arrow" aria-hidden="true">↗</span>
+              </a>
             </div>
           </div>
+        </section>
+
+        <section class="signal" aria-labelledby="elsewhere-title">
+          <div>
+            <p class="section-label">03 / elsewhere</p>
+            <p class="signal-copy" id="elsewhere-title">The pattern I keep testing: make the hard part legible, then give it a way to compound.</p>
+          </div>
+          <nav class="elsewhere" aria-label="Other links">
+            <a href="https://walkie.cc" target="_blank" rel="noopener noreferrer">Walkie <span>voice conductor for AI engineering teams ↗</span></a>
+            <a href="https://unignorable.polyfeeds.dev" target="_blank" rel="noopener noreferrer">Unignorable <span>persistent public problems from NYC data ↗</span></a>
+            <a href="https://x.com/paulljump" target="_blank" rel="noopener noreferrer">X <span>notes from the build ↗</span></a>
+            <a href="https://github.com/pauljump" target="_blank" rel="noopener noreferrer">GitHub <span>the full public workshop ↗</span></a>
+            <a href="/kit/">Kit / long version <span>how I got here ↗</span></a>
+          </nav>
         </section>
       </main>
-    </div>
-
-    <section class="compounds" aria-labelledby="compound-title">
-      <div class="shell compound-grid">
-        <div>
-          <p class="section-label">The company underneath the first workflow</p>
-          <h2 id="compound-title">Casework that compounds.</h2>
-          <p>
-            The first request is forward deployment. The second should start with
-            everything the first one taught us. Headcount grows by category, not
-            by customer.
-          </p>
-        </div>
-        <div class="loop" aria-label="How Kit compounds">
-          <div class="loop-item">
-            <strong>Provider</strong>
-            <span>What proves this business and service are real.</span>
-          </div>
-          <div class="loop-item">
-            <strong>Route</strong>
-            <span>Which rule and reimbursement category apply.</span>
-          </div>
-          <div class="loop-item">
-            <strong>FI adapter</strong>
-            <span>How this fiscal intermediary wants the packet.</span>
-          </div>
-          <div class="loop-item">
-            <strong>Outcome</strong>
-            <span>What the family reports, what changed, and what is safe to reuse.</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <div class="shell">
-      <section class="history" aria-labelledby="history-title">
-        <div class="history-grid">
-          <div>
-            <p class="section-label">Before Kit</p>
-            <h2 id="history-title">I have done this at scale.</h2>
-          </div>
-          <div class="history-copy">
-            <p>
-              At Uber, I launched the Driver app around the world to roughly
-              three million drivers, built a beta program with thousands of
-              drivers, and scaled products such as Uber Pool city by city.
-            </p>
-            <p>
-              Later I built a global forward-deployed engineering team and led
-              the 75-person Partner Engineering and Solutions organization. The
-              job was always the same: solve the sharp customer problem, find the
-              pattern, and turn it into leverage for everyone behind them.
-            </p>
-            <p>Now I am doing that for families.</p>
-          </div>
-          <div></div>
-          <div class="numbers" aria-label="Selected numbers">
-            <div class="number">
-              <strong>3M</strong>
-              <span>drivers reached through the global Driver app launch</span>
-            </div>
-            <div class="number">
-              <strong>75</strong>
-              <span>people in Partner Engineering and Solutions</span>
-            </div>
-            <div class="number">
-              <strong>3</strong>
-              <span>family-reported first-submission Kit approvals</span>
-            </div>
-            <div class="number">
-              <strong>100+</strong>
-              <span>families in Kit's first school launch, starting September 1</span>
-            </div>
-          </div>
-        </div>
-      </section>
 
       <footer>
         <span>Paul Jump · New York City</span>
-        <div class="footer-links">
-          <a href="https://kitty.polyfeeds.dev/askkit">Kit</a>
-          <a href="https://kitty.polyfeeds.dev/askkit/demo">Demo</a>
-          <a href="/case/">Applied AI work</a>
-          <a href="https://x.com/paulljump">X</a>
-          <a href="https://github.com/pauljump">GitHub</a>
-        </div>
+        <a href="mailto:pjump007@gmail.com">pjump007@gmail.com</a>
       </footer>
     </div>
   </body>
