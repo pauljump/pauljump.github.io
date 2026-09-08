@@ -23,3 +23,22 @@ The general resume is available at
 
 This repository contains no private family records, client documents, medical
 files, or unpublished legal material.
+
+MatterScope outreach analytics use the existing Pulse collector. Tagged links:
+
+- Demo: https://go.polyfeeds.dev/r/matterscope-demo-x
+- Case: https://go.polyfeeds.dev/r/matterscope-case-x
+- Source: https://go.polyfeeds.dev/r/matterscope-code-x
+
+The campaign is `legora-matterscope`. Pulse records redirect clicks, case views,
+active dwell time, case-to-demo clicks, and demo interactions / GitHub clicks.
+Tags identify the outreach link, not a verified person's identity. Scanner hits
+remain visible and are excluded from Pulse's estimated human-click count.
+
+The hosted synthetic demo alone includes `case/matterscope-tracking.js`. It sends
+allowlisted interaction names, campaign tags, a browser visitor ID, and page / referrer
+paths; Pulse adds its existing network and device metadata. It does not read document
+or runtime content. The original capture and release download in the MatterScope
+repository have no analytics. Regenerate the hosted copy with
+`node scripts/publish-matterscope-demo.mjs` (requires sibling `matterscope` checkout).
+Verify with `node --test tests/matterscope-tracking.test.mjs`.

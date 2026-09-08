@@ -336,12 +336,6 @@
             </div>
           </div>
 
-          <div class="proof-grid">
-            <div><strong>3</strong><span>synthetic documents explicitly selected; no host project directory mounted</span></div>
-            <div><strong>6</strong><span>exact source references checked against the original input snapshot</span></div>
-            <div><strong>2</strong><span>missing evidence items kept visible in the draft closing checklist</span></div>
-          </div>
-
           <div class="scope-note">
             <p class="eyebrow">The test, and what it proves</p>
             <p>
@@ -867,10 +861,7 @@
         function send(event, extra) {
           try {
             var body = payload(event, extra);
-            if (navigator.sendBeacon) {
-              navigator.sendBeacon(endpoint, new Blob([body], { type: "text/plain" }));
-              return;
-            }
+            if (navigator.sendBeacon && navigator.sendBeacon(endpoint, new Blob([body], { type: "text/plain" }))) return;
             fetch(endpoint, {
               method: "POST",
               headers: { "Content-Type": "text/plain" },
@@ -879,6 +870,17 @@
             }).catch(function () {});
           } catch (_) {}
         }
+
+        // Carry outreach attribution through the internal demo link, including new tabs.
+        document.querySelectorAll('a[href="./matterscope-demo.html"]').forEach(function (link) {
+          var target = new URL(link.href, window.location.href);
+          var params = new URLSearchParams(window.location.search);
+          ["source", "medium", "campaign", "term", "content"].forEach(function (key) {
+            var value = params.get("utm_" + key);
+            if (value) target.searchParams.set("utm_" + key, value.slice(0, 120));
+          });
+          link.href = target.href;
+        });
 
         send("page_view");
 
@@ -963,7 +965,12 @@
           try {
             var target = new URL(link.href, window.location.href);
             if (target.protocol !== "http:" && target.protocol !== "https:") return;
-            if (target.origin === window.location.origin) return;
+            if (target.origin === window.location.origin) {
+              if (target.pathname === "/case/matterscope-demo.html") {
+                send("link_click:matterscope-demo", { targetPath: target.pathname });
+              }
+              return;
+            }
             send("outbound:" + target.hostname, {
               target: target.origin + cleanPath(target.pathname),
               targetPath: cleanPath(target.pathname),
