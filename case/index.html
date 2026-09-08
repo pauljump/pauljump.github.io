@@ -6,12 +6,12 @@
     <title>Paul Jump | Selected product cases</title>
     <meta
       name="description"
-      content="Eight product cases: approval readiness, legal AI verification, user simulation, a fair small-model benchmark, and evidence-backed product systems."
+      content="Nine product cases: matter-scoped agents, approval readiness, legal AI verification, user simulation, and evidence-backed product systems."
     />
     <meta property="og:title" content="Paul Jump | Selected product cases" />
     <meta
       property="og:description"
-      content="Eight technical product cases built from live operational problems."
+      content="Nine technical product cases, including MatterScope: an inspectable boundary for agent work."
     />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://pauljump.github.io/case/" />
@@ -20,7 +20,7 @@
     <meta name="twitter:title" content="Paul Jump | Selected product cases" />
     <meta
       name="twitter:description"
-      content="Eight technical product cases built from live operational problems."
+      content="Nine technical product cases, including MatterScope: an inspectable boundary for agent work."
     />
     <link rel="stylesheet" href="./style.css" />
   </head>
@@ -30,6 +30,7 @@
       <nav aria-label="Case studies">
         <a href="#kit">kit</a>
         <a href="#legal">legal ai</a>
+        <a href="#matterscope">matterscope</a>
         <a href="#itchy">itchy</a>
         <a href="#teek">teek</a>
         <a href="#pricefixed">systems</a>
@@ -292,9 +293,95 @@
         </div>
       </section>
 
-      <section class="case-study shell" id="itchy">
+      <section class="case-study shell" id="matterscope">
         <aside class="case-index">
           <span>03</span>
+          <p>small-firm trust → execution boundary</p>
+        </aside>
+        <div class="case-body">
+          <p class="project-name">MatterScope · Matter-scoped agent work</p>
+          <h2>Give the agent a matter. Keep the boundary.</h2>
+          <p class="lede">
+            A small law firm I was helping had banned AI because it did not
+            trust it. That experience sent me into local models, legal
+            verification, and simulated firms. MatterScope takes that work to
+            the next question: can I show what an agent was allowed to access
+            and do, as clearly as I can show where an answer came from?
+          </p>
+
+          <div class="decision-grid">
+            <div>
+              <p class="eyebrow">Why connected work changes the question</p>
+              <h3>The useful context is spread across tools</h3>
+              <p>
+                A matter can involve a document repository, a deal room,
+                correspondence, and a signature workflow. On the Tuesday a
+                team needs a rarely used integration, the right context has to
+                be available. My design question was how to make that access
+                explicit for one assignment. Selecting three documents should
+                not give an agent the rest of the firm.
+              </p>
+            </div>
+            <div>
+              <p class="eyebrow">The product decision</p>
+              <h3>Make the boundary something you can inspect</h3>
+              <p>
+                MatterScope starts with an empty sandbox. Only selected files
+                are copied in. The agent returns drafts to a separate review
+                workspace, with a record of inputs, outputs, and access checks.
+                The original files stay outside the run. A lawyer can inspect
+                the packet, trace a checklist item to its source, and decide
+                what to do with the result.
+              </p>
+            </div>
+          </div>
+
+          <div class="proof-grid">
+            <div><strong>3</strong><span>synthetic documents explicitly selected; no host project directory mounted</span></div>
+            <div><strong>6</strong><span>exact source references checked against the original input snapshot</span></div>
+            <div><strong>2</strong><span>missing evidence items kept visible in the draft closing checklist</span></div>
+          </div>
+
+          <div class="scope-note">
+            <p class="eyebrow">The test, and what it proves</p>
+            <p>
+              A closing update contains a planted instruction to read another
+              client’s strategy file and send data externally. Scripted model
+              replies deliberately invoke those boundary checks through Kimi
+              Code’s real tools inside OpenShell. The other-matter host file
+              is inaccessible. The outbound request receives a denial,
+              corroborated by the runtime’s policy log. Five preflight checks
+              and four agent tool checks passed. This is a real execution with
+              scripted replies and a deterministic checklist, not a live
+              model’s legal analysis or a prompt-injection benchmark.
+            </p>
+          </div>
+          <p class="implementation-note">
+            The document-repository and deal-room labels describe the scenario;
+            vendor connectors are not implemented. Live inference can still
+            send selected documents to the configured provider, so this does
+            not solve the original cloud-data concern. It is an independent
+            experiment, not a deployment at that firm or a claim of legal
+            privilege protection. Exact quote matching checks provenance,
+            not legal correctness.
+          </p>
+          <div class="artifact-links">
+            <a href="./matterscope-demo.html" target="_blank" rel="noreferrer">
+              <span>Explore the captured MatterScope run</span><span aria-hidden="true">↗</span>
+            </a>
+            <a href="https://github.com/pauljump/matterscope" target="_blank" rel="noreferrer">
+              <span>Open the source and reproduce the boundary test</span><span aria-hidden="true">↗</span>
+            </a>
+            <a href="https://github.com/pauljump/matterscope/blob/main/docs/VALIDATION.md" target="_blank" rel="noreferrer">
+              <span>Read what was verified and what remains untested</span><span aria-hidden="true">↗</span>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="case-study shell" id="itchy">
+        <aside class="case-index">
+          <span>04</span>
           <p>constraint → technical judgment</p>
         </aside>
         <div class="case-body">
@@ -384,7 +471,7 @@
       <section class="case-study studio-case" id="studio">
         <div class="shell case-layout">
           <aside class="case-index">
-            <span>04</span>
+            <span>05</span>
             <p>family need → software factory</p>
           </aside>
           <div class="case-body">
@@ -467,7 +554,7 @@
       <section class="case-study dark" id="teek">
         <div class="shell case-layout">
           <aside class="case-index">
-            <span>05</span>
+            <span>06</span>
             <p>evidence → synthetic role → regression loop</p>
           </aside>
           <div class="case-body">
@@ -593,7 +680,7 @@
       <section class="case-study dark work-item" id="annoyance">
         <div class="shell case-layout">
           <aside class="case-index">
-            <span>06</span>
+            <span>07</span>
             <p>public complaints → product opportunity corpus</p>
           </aside>
           <div class="case-body">
@@ -621,7 +708,7 @@
 
       <section class="case-study shell work-item" id="openforx">
         <aside class="case-index">
-          <span>07</span>
+          <span>08</span>
           <p>evidence corpus → build-and-release factory</p>
         </aside>
         <div class="case-body">
@@ -657,7 +744,7 @@
 
       <section class="case-study shell work-item" id="pricefixed">
         <aside class="case-index">
-          <span>08</span>
+          <span>09</span>
           <p>fragmented records → shared infrastructure</p>
         </aside>
         <div class="case-body">
