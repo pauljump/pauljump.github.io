@@ -1,0 +1,910 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#111b16" />
+    <title>Claude Growth Lab / Paul Jump</title>
+    <meta
+      name="description"
+      content="A working growth artifact for Claude: make the first useful outcome inevitable, then let the work carry the product to the next user."
+    />
+    <meta property="og:title" content="Claude Growth Lab / Paul Jump" />
+    <meta
+      property="og:description"
+      content="A product-led growth thesis for Claude across acquisition, activation, retention, and monetization."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://pauljump.github.io/growth/" />
+    <link rel="icon" href="../favicon.svg" type="image/svg+xml" />
+    <style>
+      :root {
+        color-scheme: dark;
+        --ink: #111b16;
+        --ink-soft: #1b2a22;
+        --paper: #f1f0e9;
+        --paper-soft: #e5e7dc;
+        --muted: #9daea2;
+        --line: #3b5044;
+        --mint: #baf2ce;
+        --mint-dark: #236042;
+        --orange: #ff8765;
+        --blue: #b9d8f4;
+        --serif: Iowan Old Style, Baskerville, "Times New Roman", serif;
+        --sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+          "Segoe UI", sans-serif;
+      }
+
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+
+      body {
+        margin: 0;
+        background:
+          radial-gradient(circle at 82% 0%, rgba(77, 146, 104, 0.22), transparent 30rem),
+          var(--ink);
+        color: var(--paper);
+        font-family: var(--sans);
+        -webkit-font-smoothing: antialiased;
+      }
+
+      a { color: inherit; }
+      a:focus-visible,
+      button:focus-visible { outline: 3px solid var(--orange); outline-offset: 4px; }
+
+      .shell { width: min(1160px, calc(100% - 44px)); margin: 0 auto; }
+
+      header {
+        display: flex;
+        min-height: 84px;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .brand,
+      .back-link {
+        color: var(--paper);
+        font-size: 12px;
+        font-weight: 780;
+        letter-spacing: 0.04em;
+        text-decoration: none;
+      }
+
+      .brand { display: inline-flex; align-items: center; gap: 11px; }
+
+      .brand-mark {
+        display: grid;
+        width: 28px;
+        height: 28px;
+        place-items: center;
+        border-radius: 50%;
+        background: var(--mint);
+        color: var(--ink);
+        font-family: var(--serif);
+        font-size: 14px;
+        font-style: italic;
+      }
+
+      .back-link { color: var(--muted); font-weight: 650; }
+      .back-link:hover { color: var(--mint); }
+
+      .eyebrow,
+      .section-code {
+        margin: 0 0 18px;
+        color: var(--mint);
+        font-size: 11px;
+        font-weight: 820;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+      }
+
+      .hero {
+        display: grid;
+        grid-template-columns: minmax(0, 1.2fr) minmax(300px, 0.8fr);
+        gap: 88px;
+        align-items: end;
+        padding: 108px 0 116px;
+      }
+
+      h1,
+      h2,
+      h3,
+      p { margin-top: 0; }
+
+      h1 {
+        max-width: 800px;
+        margin-bottom: 30px;
+        font-family: var(--serif);
+        font-size: clamp(62px, 9.5vw, 124px);
+        font-weight: 500;
+        letter-spacing: -0.078em;
+        line-height: 0.84;
+      }
+
+      .hero-copy {
+        max-width: 700px;
+        margin-bottom: 0;
+        color: #d7ddd5;
+        font-size: clamp(20px, 2.2vw, 28px);
+        letter-spacing: -0.025em;
+        line-height: 1.36;
+      }
+
+      .role-card {
+        border-top: 1px solid var(--mint);
+        padding-top: 16px;
+      }
+
+      .role-card .label {
+        display: block;
+        margin-bottom: 23px;
+        color: var(--mint);
+        font-size: 11px;
+        font-weight: 820;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      .role-card strong {
+        display: block;
+        margin-bottom: 10px;
+        font-family: var(--serif);
+        font-size: 30px;
+        font-weight: 500;
+        letter-spacing: -0.045em;
+        line-height: 1;
+      }
+
+      .role-card p {
+        margin-bottom: 22px;
+        color: var(--muted);
+        font-size: 14px;
+        line-height: 1.6;
+      }
+
+      .role-tags { display: flex; flex-wrap: wrap; gap: 7px; }
+
+      .role-tags span,
+      .source-tag {
+        display: inline-flex;
+        min-height: 27px;
+        align-items: center;
+        padding: 0 10px;
+        border: 1px solid var(--line);
+        border-radius: 999px;
+        color: var(--paper-soft);
+        font-size: 11px;
+        font-weight: 700;
+      }
+
+      .section {
+        padding: 94px 0 108px;
+        border-top: 1px solid var(--line);
+      }
+
+      .section-head {
+        display: grid;
+        grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+        gap: 70px;
+        align-items: end;
+        margin-bottom: 48px;
+      }
+
+      h2 {
+        max-width: 560px;
+        margin-bottom: 0;
+        font-family: var(--serif);
+        font-size: clamp(42px, 6vw, 76px);
+        font-weight: 500;
+        letter-spacing: -0.06em;
+        line-height: 0.9;
+      }
+
+      .section-lede {
+        max-width: 560px;
+        margin: 0;
+        color: var(--muted);
+        font-size: 16px;
+        line-height: 1.62;
+      }
+
+      .thesis {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1px;
+        border: 1px solid var(--line);
+        background: var(--line);
+      }
+
+      .thesis-card {
+        min-height: 215px;
+        padding: 24px;
+        background: var(--ink-soft);
+      }
+
+      .thesis-card span {
+        display: block;
+        margin-bottom: 48px;
+        color: var(--orange);
+        font-family: var(--serif);
+        font-size: 20px;
+        font-style: italic;
+      }
+
+      .thesis-card strong {
+        display: block;
+        margin-bottom: 9px;
+        font-family: var(--serif);
+        font-size: 29px;
+        font-weight: 500;
+        letter-spacing: -0.04em;
+      }
+
+      .thesis-card p {
+        max-width: 250px;
+        margin-bottom: 0;
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.5;
+      }
+
+      .lab {
+        padding: 100px 0 112px;
+        background: var(--paper);
+        color: var(--ink);
+      }
+
+      .lab .section-code { color: var(--mint-dark); }
+      .lab .section-lede { color: #53635a; }
+
+      .lab-head { margin-bottom: 42px; }
+
+      .lab-head h2 { max-width: 740px; }
+
+      .mode-switch {
+        display: inline-flex;
+        gap: 3px;
+        margin-top: 25px;
+        padding: 3px;
+        border: 1px solid #c3c9bb;
+        border-radius: 999px;
+        background: #e1e3d9;
+      }
+
+      .mode-switch button,
+      .stage button,
+      .advance {
+        border: 0;
+        cursor: pointer;
+        font: inherit;
+      }
+
+      .mode-switch button {
+        min-height: 34px;
+        padding: 0 15px;
+        border-radius: 999px;
+        background: transparent;
+        color: #5a685f;
+        font-size: 12px;
+        font-weight: 780;
+      }
+
+      .mode-switch button.active { background: var(--ink); color: var(--mint); }
+
+      .lab-grid {
+        display: grid;
+        grid-template-columns: minmax(210px, 0.7fr) minmax(0, 1.3fr);
+        gap: 1px;
+        border: 1px solid #bac3b7;
+        background: #bac3b7;
+      }
+
+      .stages {
+        padding: 16px;
+        background: #e4e7dc;
+      }
+
+      .stage button {
+        display: grid;
+        width: 100%;
+        grid-template-columns: 35px 1fr;
+        gap: 10px;
+        padding: 19px 13px;
+        border-bottom: 1px solid #c5cdc0;
+        background: transparent;
+        color: #758278;
+        text-align: left;
+      }
+
+      .stage:last-child button { border-bottom: 0; }
+      .stage button.active { color: var(--ink); }
+
+      .stage-number {
+        color: var(--orange);
+        font-family: var(--serif);
+        font-size: 17px;
+        font-style: italic;
+      }
+
+      .stage-title {
+        display: block;
+        margin-bottom: 5px;
+        font-size: 14px;
+        font-weight: 780;
+      }
+
+      .stage-note {
+        display: block;
+        font-size: 12px;
+        line-height: 1.4;
+      }
+
+      .stage button.active .stage-note { color: #627166; }
+
+      .receipt {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) 225px;
+        gap: 28px;
+        min-height: 407px;
+        padding: 31px;
+        background: var(--ink);
+        color: var(--paper);
+      }
+
+      .receipt-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 20px;
+        margin-bottom: 48px;
+        color: var(--muted);
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+
+      .live-dot { color: var(--mint); }
+
+      .receipt h3 {
+        max-width: 580px;
+        margin-bottom: 15px;
+        font-family: var(--serif);
+        font-size: clamp(32px, 4.4vw, 58px);
+        font-weight: 500;
+        letter-spacing: -0.055em;
+        line-height: 0.95;
+      }
+
+      .receipt-body {
+        max-width: 560px;
+        margin-bottom: 25px;
+        color: #bdc9c0;
+        font-size: 15px;
+        line-height: 1.62;
+      }
+
+      .receipt-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+
+      .advance {
+        min-height: 40px;
+        padding: 0 15px;
+        border-radius: 999px;
+        background: var(--mint);
+        color: var(--ink);
+        font-size: 12px;
+        font-weight: 800;
+      }
+
+      .advance:hover { background: #d9ffe5; }
+
+      .receipt-side {
+        align-self: end;
+        border-left: 1px solid var(--line);
+        padding-left: 22px;
+      }
+
+      .receipt-side .side-label {
+        display: block;
+        margin-bottom: 12px;
+        color: var(--mint);
+        font-size: 10px;
+        font-weight: 820;
+        letter-spacing: 0.13em;
+        text-transform: uppercase;
+      }
+
+      .receipt-side strong {
+        display: block;
+        margin-bottom: 7px;
+        font-size: 15px;
+      }
+
+      .receipt-side p {
+        margin-bottom: 22px;
+        color: var(--muted);
+        font-size: 12px;
+        line-height: 1.5;
+      }
+
+      .event {
+        padding-top: 13px;
+        border-top: 1px solid var(--line);
+        color: var(--blue);
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        font-size: 11px;
+        line-height: 1.5;
+        overflow-wrap: anywhere;
+      }
+
+      .loop-note {
+        display: flex;
+        justify-content: space-between;
+        gap: 24px;
+        margin-top: 17px;
+        color: #66756b;
+        font-size: 12px;
+      }
+
+      .loop-note strong { color: var(--ink); }
+
+      .system-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+      }
+
+      .system-card {
+        min-height: 278px;
+        padding: 23px;
+        border: 1px solid var(--line);
+        background: var(--ink-soft);
+      }
+
+      .system-card .card-index {
+        display: block;
+        margin-bottom: 54px;
+        color: var(--orange);
+        font-family: var(--serif);
+        font-size: 18px;
+        font-style: italic;
+      }
+
+      .system-card h3 {
+        margin-bottom: 10px;
+        font-family: var(--serif);
+        font-size: 28px;
+        font-weight: 500;
+        letter-spacing: -0.045em;
+      }
+
+      .system-card p {
+        margin-bottom: 20px;
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.55;
+      }
+
+      .metric {
+        padding-top: 12px;
+        border-top: 1px solid var(--line);
+        color: var(--mint);
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        font-size: 11px;
+      }
+
+      .timeline {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1px;
+        border: 1px solid var(--line);
+        background: var(--line);
+      }
+
+      .week {
+        min-height: 220px;
+        padding: 21px;
+        background: var(--ink-soft);
+      }
+
+      .week-number {
+        display: block;
+        margin-bottom: 48px;
+        color: var(--mint);
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        font-size: 11px;
+      }
+
+      .week strong {
+        display: block;
+        margin-bottom: 10px;
+        font-size: 14px;
+      }
+
+      .week p {
+        margin-bottom: 0;
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.55;
+      }
+
+      .proof {
+        background: var(--paper);
+        color: var(--ink);
+      }
+
+      .proof .section-code { color: var(--mint-dark); }
+      .proof .section-lede { color: #53635a; }
+
+      .proof-grid {
+        display: grid;
+        grid-template-columns: minmax(0, 0.75fr) minmax(0, 1.25fr);
+        gap: 70px;
+        align-items: start;
+      }
+
+      .proof-statement {
+        max-width: 450px;
+        margin: 0;
+        font-family: var(--serif);
+        font-size: clamp(29px, 4vw, 48px);
+        letter-spacing: -0.055em;
+        line-height: 1.02;
+      }
+
+      .proof-list { border-top: 1px solid #aeb9ad; }
+
+      .proof-item {
+        display: grid;
+        grid-template-columns: 145px minmax(0, 1fr);
+        gap: 24px;
+        padding: 19px 0;
+        border-bottom: 1px solid #c8cec4;
+      }
+
+      .proof-item strong { font-size: 14px; }
+      .proof-item p { margin: 0; color: #53635a; font-size: 13px; line-height: 1.55; }
+      .proof-item a { text-underline-offset: 4px; }
+
+      .anti {
+        padding: 66px 0 74px;
+        border-top: 1px solid #c8cec4;
+        background: var(--paper-soft);
+        color: var(--ink);
+      }
+
+      .anti .section-code { color: var(--mint-dark); }
+
+      .anti-inner {
+        display: grid;
+        grid-template-columns: 0.85fr 1.15fr;
+        gap: 70px;
+        align-items: start;
+      }
+
+      .anti h2 { font-size: clamp(36px, 5vw, 57px); }
+      .anti-copy { max-width: 560px; color: #53635a; font-size: 15px; line-height: 1.65; }
+
+      .sources {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 25px;
+      }
+
+      .source-tag { border-color: #aeb9ad; color: #53635a; text-decoration: none; }
+      .source-tag:hover { border-color: var(--mint-dark); color: var(--mint-dark); }
+
+      footer {
+        display: flex;
+        min-height: 112px;
+        align-items: center;
+        justify-content: space-between;
+        gap: 30px;
+        color: var(--muted);
+        font-size: 12px;
+      }
+
+      footer a { color: var(--paper); font-weight: 750; text-underline-offset: 4px; }
+
+      @media (max-width: 820px) {
+        .shell { width: min(100% - 28px, 640px); }
+        header { min-height: 70px; }
+        .hero,
+        .section-head,
+        .proof-grid,
+        .anti-inner { grid-template-columns: 1fr; gap: 40px; }
+        .hero { padding: 76px 0 84px; }
+        h1 { font-size: clamp(59px, 17vw, 100px); }
+        .section, .lab { padding: 70px 0 78px; }
+        .thesis,
+        .system-grid,
+        .timeline { grid-template-columns: 1fr 1fr; }
+        .lab-grid { grid-template-columns: 1fr; }
+        .stages { display: grid; grid-template-columns: 1fr 1fr; }
+        .stage button { min-height: 105px; }
+        .stage:nth-child(odd) button { border-right: 1px solid #c5cdc0; }
+        .stage:nth-last-child(-n+2) button { border-bottom: 0; }
+        .receipt { grid-template-columns: 1fr; }
+        .receipt-side { border-top: 1px solid var(--line); border-left: 0; padding: 20px 0 0; }
+      }
+
+      @media (max-width: 540px) {
+        .back-link { font-size: 11px; }
+        .hero-copy { font-size: 20px; }
+        .thesis,
+        .system-grid,
+        .timeline { grid-template-columns: 1fr; }
+        .thesis-card { min-height: 160px; }
+        .thesis-card span,
+        .system-card .card-index,
+        .week-number { margin-bottom: 27px; }
+        .stages { grid-template-columns: 1fr; }
+        .stage button { min-height: auto; border-right: 0 !important; border-bottom: 1px solid #c5cdc0 !important; }
+        .stage:last-child button { border-bottom: 0 !important; }
+        .receipt { min-height: 0; padding: 22px; }
+        .receipt-top { margin-bottom: 35px; }
+        .receipt h3 { font-size: 39px; }
+        .loop-note { display: block; }
+        .loop-note span { display: block; margin-top: 7px; }
+        .proof-item { grid-template-columns: 1fr; gap: 8px; }
+        footer { align-items: flex-start; flex-direction: column; justify-content: center; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="shell">
+      <header>
+        <a class="brand" href="/" aria-label="Paul Jump home">
+          <span class="brand-mark" aria-hidden="true">pj</span>
+          paul jump / growth lab
+        </a>
+        <a class="back-link" href="/">back to links ↗</a>
+      </header>
+
+      <main>
+        <section class="hero" aria-labelledby="hero-title">
+          <div>
+            <p class="eyebrow">a working artifact / Product Manager, Growth</p>
+            <h1 id="hero-title">Make the first win inevitable.</h1>
+            <p class="hero-copy">
+              Claude’s next growth loop is not another invite mechanic. It is the useful work a person gets back, carrying the next person into Claude.
+            </p>
+          </div>
+          <aside class="role-card">
+            <span class="label">The role, translated</span>
+            <strong>Acquisition → activation → retention → monetization</strong>
+            <p>
+              A growth system for a product that now lives across web, mobile, desktop, code, connected tools, and teams. The loop has to work for a person first, then survive contact with an organization.
+            </p>
+            <div class="role-tags" aria-label="Role themes">
+              <span>B2C subscription</span><span>Product-led enterprise</span><span>Safety + speed</span>
+            </div>
+          </aside>
+        </section>
+
+        <section class="section" aria-labelledby="thesis-title">
+          <div class="section-head">
+            <div>
+              <p class="section-code">01 / thesis</p>
+              <h2 id="thesis-title">A task.<br />A receipt.<br />A teammate.</h2>
+            </div>
+            <p class="section-lede">
+              The smallest durable unit of Claude growth is not a message. It is a finished thing that earns a second user. That artifact should show what happened, what is supported, what is still uncertain, and what the next person can do.
+            </p>
+          </div>
+          <div class="thesis">
+            <article class="thesis-card"><span>01 / activation</span><strong>Do the job.</strong><p>Get a user to a meaningful outcome before asking them to learn a system.</p></article>
+            <article class="thesis-card"><span>02 / expansion</span><strong>Show the work.</strong><p>Make the result easy to hand off without leaking context or hiding uncertainty.</p></article>
+            <article class="thesis-card"><span>03 / retention</span><strong>Return to it.</strong><p>Let the next task begin where the last one ended, with a reason to come back.</p></article>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <section class="lab" aria-labelledby="lab-title">
+      <div class="shell">
+        <div class="lab-head">
+          <div class="section-head">
+            <div>
+              <p class="section-code">02 / play the loop</p>
+              <h2 id="lab-title">What growth feels like when the product does the selling.</h2>
+            </div>
+            <p class="section-lede">
+              Choose the starting context. Then move one job through the loop. This is a product hypothesis, not a claim about current Claude behavior.
+            </p>
+          </div>
+          <div class="mode-switch" role="group" aria-label="Choose a starting context">
+            <button class="active" type="button" data-mode="individual">individual</button>
+            <button type="button" data-mode="team">team</button>
+          </div>
+        </div>
+
+        <div class="lab-grid">
+          <div class="stages" role="tablist" aria-label="Growth loop stages">
+            <div class="stage"><button class="active" type="button" data-stage="0" role="tab"><span class="stage-number">01</span><span><span class="stage-title">Arrive with a job</span><span class="stage-note">A concrete problem, not a blank chat.</span></span></button></div>
+            <div class="stage"><button type="button" data-stage="1" role="tab"><span class="stage-number">02</span><span><span class="stage-title">Get the receipt</span><span class="stage-note">A useful result with visible boundaries.</span></span></button></div>
+            <div class="stage"><button type="button" data-stage="2" role="tab"><span class="stage-number">03</span><span><span class="stage-title">Hand off the work</span><span class="stage-note">The next person can act without a tour.</span></span></button></div>
+            <div class="stage"><button type="button" data-stage="3" role="tab"><span class="stage-number">04</span><span><span class="stage-title">Return with context</span><span class="stage-note">The next job starts further ahead.</span></span></button></div>
+          </div>
+          <div class="receipt" aria-live="polite">
+            <div>
+              <div class="receipt-top"><span class="live-dot">● hypothesis in motion</span><span id="stage-position">stage 01 / 04</span></div>
+              <h3 id="stage-title">Start with the work you already need to do.</h3>
+              <p class="receipt-body" id="stage-body">A person arrives with a job that has edges: turn a messy set of inputs into a decision, a draft, a plan, or a checked answer. Claude does not need to explain itself first. It needs to make progress.</p>
+              <div class="receipt-actions"><button class="advance" type="button" id="advance">advance the loop →</button></div>
+            </div>
+            <aside class="receipt-side">
+              <span class="side-label">Activation receipt</span>
+              <strong id="artifact-title">The job is legible.</strong>
+              <p id="artifact-body">A clear starting task gives the first session a finish line.</p>
+              <div class="event" id="event-name">growth.job_started<br />source=role_native_entry<br />context=individual</div>
+            </aside>
+          </div>
+        </div>
+        <div class="loop-note"><strong>Design constraint:</strong><span>Every handoff is scoped, reviewable, and optional. A growth loop that creates unreviewable output is a churn loop in disguise.</span></div>
+      </div>
+    </section>
+
+    <div class="shell">
+      <section class="section" aria-labelledby="system-title">
+        <div class="section-head">
+          <div>
+            <p class="section-code">03 / the growth system</p>
+            <h2 id="system-title">One loop.<br />Three surfaces.</h2>
+          </div>
+          <p class="section-lede">I would organize the work around the product’s actual expansion path, not a generic funnel. The metric changes as the artifact travels.</p>
+        </div>
+        <div class="system-grid">
+          <article class="system-card"><span class="card-index">loop 01</span><h3>Person → outcome</h3><p>Make the first session feel like a completed job. Onboarding should adapt to the work, not make the user classify themselves before they get value.</p><div class="metric">north star: first_useful_outcome</div></article>
+          <article class="system-card"><span class="card-index">loop 02</span><h3>Outcome → team</h3><p>Turn a finished result into a safe, scoped handoff. The second user should understand why this matters before they understand how Claude works.</p><div class="metric">north star: second_user_continues</div></article>
+          <article class="system-card"><span class="card-index">loop 03</span><h3>Team → system</h3><p>Let repeated team behavior graduate into a connected workflow with the right permissions, controls, and plan value.</p><div class="metric">north star: repeated_workflow_expands</div></article>
+        </div>
+      </section>
+
+      <section class="section" aria-labelledby="experiments-title">
+        <div class="section-head">
+          <div>
+            <p class="section-code">04 / first experiments</p>
+            <h2 id="experiments-title">Small bets with a long memory.</h2>
+          </div>
+          <p class="section-lede">The first month should produce learning that compounds. Each experiment has a clear user promise, a kill condition, and an instrumentation path.</p>
+        </div>
+        <div class="timeline">
+          <article class="week"><span class="week-number">WEEK 01</span><strong>Instrument the actual win</strong><p>Define the event that means a user got useful work back. Segment by task, surface, plan, and new versus returning user.</p></article>
+          <article class="week"><span class="week-number">WEEK 02</span><strong>Improve the first job</strong><p>Test role-native entry points against the blank chat. Optimize for completed work, not clicks or time in onboarding.</p></article>
+          <article class="week"><span class="week-number">WEEK 03</span><strong>Ship the handoff</strong><p>Let a user share a scoped artifact with a next action. Measure whether a second person continues the work.</p></article>
+          <article class="week"><span class="week-number">WEEK 04</span><strong>Scale or kill</strong><p>Read the quality and safety signals with the growth numbers. Keep only loops that improve value without eroding trust.</p></article>
+        </div>
+      </section>
+
+      <section class="section proof" aria-labelledby="proof-title">
+        <div class="section-head">
+          <div>
+            <p class="section-code">05 / receipts</p>
+            <h2 id="proof-title">I’ve been building the loop.</h2>
+          </div>
+          <p class="section-lede">The hypothesis comes from a decade in Uber product and engineering plus dozens of side projects. Different users, same operating question: what makes the next useful action easier?</p>
+        </div>
+        <div class="proof-grid">
+          <p class="proof-statement">Not a résumé. The receipts are the products.</p>
+          <div class="proof-list">
+            <div class="proof-item"><strong>Uber / B2C</strong><p>Co-founded Product Operations and built the release system for Rider, Driver, and Uber Pool across 60+ countries. Earlier: growth marketing and rider acquisition in Atlanta.</p></div>
+            <div class="proof-item"><strong>Uber / B2B</strong><p>Built and led the external API and partner engineering system, turning repeated enterprise needs into reusable platform capabilities.</p></div>
+            <div class="proof-item"><strong><a href="https://walkie.cc" target="_blank" rel="noopener noreferrer">Walkie ↗</a></strong><p>A voice conductor for an AI engineering team. The interface starts with the work, keeps approvals visible, and leaves a receipt.</p></div>
+            <div class="proof-item"><strong><a href="https://github.com/pauljump/ai-factory" target="_blank" rel="noopener noreferrer">AI Factory ↗</a></strong><p>Persistent memory for coding agents. A direct experiment in turning one session’s context into the next session’s leverage.</p></div>
+            <div class="proof-item"><strong><a href="https://opwddkit.com" target="_blank" rel="noopener noreferrer">OPWDD Kit ↗</a></strong><p>A high-stakes workflow where sources, missing facts, parent review, and the final packet all matter more than a clever chat response.</p></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="anti" aria-labelledby="anti-title">
+        <div class="anti-inner">
+          <div>
+            <p class="section-code">06 / the non-negotiable</p>
+            <h2 id="anti-title">No dark patterns.</h2>
+          </div>
+          <div>
+            <p class="anti-copy">I would not optimize Claude growth by manufacturing anxiety, hiding uncertainty, or turning private work into public content by default. The durable advantage is calibrated trust: users know what Claude did, what it did not do, and why the next step is worth taking.</p>
+            <p class="anti-copy">That is the growth system I want to build: fast enough for a frontier lab, legible enough for a safety-minded one, and useful enough that the product earns its next user.</p>
+            <div class="sources" aria-label="Research sources">
+              <a class="source-tag" href="https://job-boards.greenhouse.io/anthropic/jobs/5406106008" target="_blank" rel="noopener noreferrer">role spec ↗</a>
+              <a class="source-tag" href="https://www.anthropic.com/news/introducing-claude-tag" target="_blank" rel="noopener noreferrer">Claude Tag ↗</a>
+              <a class="source-tag" href="https://claude.com/blog/integrations" target="_blank" rel="noopener noreferrer">Integrations ↗</a>
+              <a class="source-tag" href="https://www.anthropic.com/news/how-ai-is-transforming-work-at-anthropic" target="_blank" rel="noopener noreferrer">Client Zero research ↗</a>
+              <a class="source-tag" href="https://www.lennysnewsletter.com/p/anthropics-1b-to-19b-growth-run" target="_blank" rel="noopener noreferrer">Amol on growth ↗</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <footer>
+        <span>Paul Jump / Claude Growth Lab</span>
+        <span><a href="/resume/Paul-Jump-Resume.docx">resume</a> · <a href="mailto:pjump007@gmail.com">contact</a> · <a href="/">home</a></span>
+      </footer>
+    </div>
+
+    <script>
+      (() => {
+        const modes = {
+          individual: {
+            context: "individual",
+            title: [
+              "Start with the work you already need to do.",
+              "Get a finished thing back, not a tour.",
+              "Make the handoff safe and obvious.",
+              "Return with the project already in context."
+            ],
+            body: [
+              "A person arrives with a job that has edges: turn a messy set of inputs into a decision, a draft, a plan, or a checked answer. Claude does not need to explain itself first. It needs to make progress.",
+              "The first useful outcome is a receipt: the result, the sources or inputs that shaped it, the open questions, and the next action. Value is visible before the user has to become an expert.",
+              "The artifact is easy to share with the right boundary around it. A second person can pick up the next action without inheriting a private transcript or a mystery answer.",
+              "The next session starts with the project, not a blank box. Returning is not a loyalty prompt. It is the shortest path to the next useful outcome."
+            ],
+            artifact: [
+              ["The job is legible.", "A clear starting task gives the first session a finish line."],
+              ["The result is inspectable.", "The user can tell what changed and what still needs judgment."],
+              ["The work can travel.", "The next person gets only the context the owner chooses to share."],
+              ["The loop has memory.", "Return behavior is attached to a real project, not an artificial streak."]
+            ]
+          },
+          team: {
+            context: "team",
+            title: [
+              "Start where the team is already working.",
+              "Give the channel a useful first artifact.",
+              "Let the next person continue, not restart.",
+              "Turn repeated work into a governed workflow."
+            ],
+            body: [
+              "A team arrives from a shared surface: a channel, a project, a codebase, or a connected tool. Claude is invited into a real piece of work, not presented as another destination everyone must remember to visit.",
+              "The first result lands where the team can inspect it. The value is not just the answer. It is the reduced coordination cost: a decision brief, a draft, a checklist, or a root-cause path.",
+              "The next person can tag in, see the relevant context, and take the next step with permissions intact. The artifact is the invitation. The work is the referral.",
+              "When the behavior repeats, the team has evidence for a deeper workflow: a connector, a scoped identity, a plugin, or a plan that matches the value being created."
+            ],
+            artifact: [
+              ["The team has a starting point.", "A real channel or workflow is a better entry surface than a blank product tour."],
+              ["The channel sees progress.", "A useful artifact makes Claude legible to people who did not initiate the task."],
+              ["Context stays scoped.", "A shared result does not mean shared access to everything behind it."],
+              ["Adoption earns expansion.", "Repeated value tells the team which connected workflow is worth building next."]
+            ]
+          }
+        };
+        const stages = [
+          ["growth.job_started", "source=role_native_entry"],
+          ["growth.first_useful_outcome", "artifact=reviewable_receipt"],
+          ["growth.scoped_handoff", "recipient=next_actor"],
+          ["growth.return_with_context", "surface=project_memory"]
+        ];
+        let mode = "individual";
+        let stage = 0;
+        const $ = (selector) => document.querySelector(selector);
+        const render = () => {
+          const data = modes[mode];
+          $("#stage-title").textContent = data.title[stage];
+          $("#stage-body").textContent = data.body[stage];
+          $("#artifact-title").textContent = data.artifact[stage][0];
+          $("#artifact-body").textContent = data.artifact[stage][1];
+          $("#stage-position").textContent = `stage ${String(stage + 1).padStart(2, "0")} / 04`;
+          $("#event-name").innerHTML = `${stages[stage][0]}<br />${stages[stage][1]}<br />context=${data.context}`;
+          document.querySelectorAll("[data-stage]").forEach((button) => button.classList.toggle("active", Number(button.dataset.stage) === stage));
+        };
+        document.querySelectorAll("[data-mode]").forEach((button) => button.addEventListener("click", () => {
+          mode = button.dataset.mode;
+          stage = 0;
+          document.querySelectorAll("[data-mode]").forEach((item) => item.classList.toggle("active", item === button));
+          render();
+        }));
+        document.querySelectorAll("[data-stage]").forEach((button) => button.addEventListener("click", () => {
+          stage = Number(button.dataset.stage);
+          render();
+        }));
+        $("#advance").addEventListener("click", () => {
+          stage = (stage + 1) % 4;
+          render();
+        });
+      })();
+    </script>
+  </body>
+</html>
