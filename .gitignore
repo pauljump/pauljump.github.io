@@ -1,1 +1,10 @@
 .gstack/
+
+# Generated local files; source and retained evidence remain explicit.
+.DS_Store
+__pycache__/
+*.pyc
+*.tsbuildinfo
+.next/
+.next-*/
+.build/
