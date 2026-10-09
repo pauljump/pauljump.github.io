@@ -5,7 +5,8 @@ Paul's personal site and the public story of how a wide year of building led to
 
 Live site: [pauljump.github.io](https://pauljump.github.io)
 
-Narrative portfolio: [pauljump.github.io/portfolio](https://pauljump.github.io/portfolio)
+The narrative portfolio at `/portfolio/` was retired on October 9, 2026. Its
+source remains recoverable from Git history.
 
 The repository is a dependency-free static GitHub Pages site. The homepage is
 the short-link hub authored directly in `index.html`. The longer Kit narrative
